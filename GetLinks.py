@@ -157,7 +157,7 @@ def getGoodsInfo_3(fDirectory, count, numOfGoods):
 
 def getGoodsLinks(shopName):
     fName = shopName + "상품정보"
-    fDirectory = "/Users/cs402a/Desktop/PythonFile" + shopName + "/" + fName
+    fDirectory = "/Users/cs402a/Desktop/PythonFile/" + shopName + "/" + fName
 
     if shopName == "육육걸즈":
         # 아우터
