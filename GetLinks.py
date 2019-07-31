@@ -104,7 +104,6 @@ def getGoodsInfo_3(fDirectory, count, numOfGoods):
 
     for i in range(1, numOfGoods):
         if count < 40:
-            print(count)
             count = count + 1
             a = driver.find_element_by_xpath(
                 "/html/body/div[2]/div[2]/div[1]/div[2]/div[4]/div[2]/ul/li[" + str(
@@ -144,7 +143,6 @@ def getGoodsInfo_3(fDirectory, count, numOfGoods):
 
             w_desc = link, image, title, price, description
             print(w_desc)
-            print("-------------------------")
             # with open(fDirectory, "a", encoding="utf-8") as f:
             # f.write(str(w_desc))
         else:
@@ -154,7 +152,92 @@ def getGoodsInfo_3(fDirectory, count, numOfGoods):
                 "/html/body/div[2]/div[2]/div[1]/div[2]/div[5]/a[3]")
             next_page_url = next_button.get_attribute("href")
             driver.get(next_page_url)
+            
+def getGoodsInfo_4(fDirectory, count, numOfGoods):
+    page = 1
+    for i in range(1, numOfGoods):
+        if count < 100:
+            count = count + 1
+            a = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[1]/div[6]/div[2]/ul/li[" + str(
+                    count) + "]/div[1]/a")
+            link = a.get_attribute("href")
+            img = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[1]/div[6]/div[2]/ul/li[" + str(
+                    count) + "]/div[1]/a/img")
+            image = img.get_attribute("src")
+            span1 = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[1]/div[6]/div[2]/ul/li[" + str(
+                    count) + "]/div[2]/strong/a/span[2]")
+            title = span1.text
+            span2 = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[1]/div[6]/div[2]/ul/li[" + str(
+                    count) + "]/div[2]/ul/li[1]/span")
+            price = span2.text
+            try:
+                span3 = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[1]/div[6]/div[2]/ul/li[" + str(
+                        count) + "]/div[2]/ul/li[5]/span")
+                description = span3.text
+            except:
+                try:
+                    span3 = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[1]/div[6]/div[2]/ul/li[" + str(
+                            count) + "]/div[2]/ul/li[4]/span")
+                    description = span3.text
+                except:
+                    span3 = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[1]/div[6]/div[2]/ul/li[" + str(
+                            count) + "]/div[2]/ul/li[3]/span")
+                    description = span3.text
 
+            w_desc = link, image, title, price, description
+            print(w_desc)
+            # with open(fDirectory, "a", encoding="utf-8") as f:
+            # f.write(str(w_desc))
+        else:
+            count = 0
+            page = page + 1
+            next_button = driver.find_element_by_xpath(
+                "/html/body/div[7]/div[2]/div[1]/div[7]/a[2]")
+            next_page_url = next_button.get_attribute("href")
+            driver.get(next_page_url)
+            
+def getGoodsInfo_5(fDirectory, count, numOfGoods):
+    page = 1
+    for i in range(1, numOfGoods):
+        try:
+            if count < 100:
+                count = count + 1
+                a = driver.find_element_by_xpath(
+                    "/html/body/div[2]/div[3]/div[1]/div[5]/div[2]/ul/li[" + str(
+                        count) + "]/div[1]/a")
+                link = a.get_attribute("href")
+                img = driver.find_element_by_xpath(
+                    "/html/body/div[2]/div[3]/div[1]/div[5]/div[2]/ul/li[" + str(
+                        count) + "]/div[1]/a/img")
+                image = img.get_attribute("src")
+                span1 = driver.find_element_by_xpath(
+                    "/html/body/div[2]/div[3]/div[1]/div[5]/div[2]/ul/li[" + str(
+                        count) + "]/div[2]/p/a/span[2]")
+                title = span1.text
+                span2 = driver.find_element_by_xpath(
+                    "/html/body/div[2]/div[3]/div[1]/div[5]/div[2]/ul/li[" + str(
+                        count) + "]/div[2]/ul/li[2]")
+                price = span2.text
+                span3 = driver.find_element_by_xpath(
+                    "/html/body/div[2]/div[3]/div[1]/div[5]/div[2]/ul/li[" + str(
+                        count) + "]/div[2]/ul/li[3]")
+                description = span3.text
+
+                w_desc = link, image, title, price, description
+                print(w_desc)
+
+                #with open(fDirectory, "a", encoding="utf-8") as f:
+                    #f.write(str(w_desc))
+            else:
+                count = 0
+                page = page + 1
+                next_button = driver.find_element_by_xpath(
+                    "/html/body/div[2]/div[3]/div[1]/div[6]/a[3]")
+                next_page_url = next_button.get_attribute("href")
+                driver.get(next_page_url)
+        except:
+            time.sleep(0.001)
+            
 def getGoodsLinks(shopName):
     fName = shopName + "상품정보"
     fDirectory = "/Users/cs402a/Desktop/PythonFile/" + shopName + "/" + fName
@@ -260,7 +343,6 @@ def getGoodsLinks(shopName):
         getGoodsInfo_2(fDirectory, count, numOfGoods)
 
     if shopName == "슬로우앤드":
-        '''
         # 아우터
         url = "https://www.slowand.com/category/outer/24/"
         driver.get(url)
@@ -268,8 +350,7 @@ def getGoodsLinks(shopName):
         strong = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[4]/div[1]/div/p/strong")
         numOfGoods = int(strong.text)
         getGoodsInfo_3(fDirectory, count, numOfGoods)
-        '''
-        '''
+        
         # 탑
         url = "https://www.slowand.com/category/top/25/"
         driver.get(url)
@@ -278,7 +359,7 @@ def getGoodsLinks(shopName):
         numOfGoods = int(strong.text)
         print(numOfGoods)
         getGoodsInfo_3(fDirectory, count, numOfGoods)
-        '''
+        
         # 드레스
         url = "https://www.slowand.com/category/dress/27/"
         driver.get(url)
@@ -286,13 +367,60 @@ def getGoodsLinks(shopName):
         strong = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[4]/div[1]/div/p/strong")
         numOfGoods = int(strong.text)
         getGoodsInfo_3(fDirectory, count, numOfGoods)
-
+        
+        # 스커트
+        url = "https://www.slowand.com/category/skirt/70/"
+        driver.get(url)
+        count = 0
+        strong = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[4]/div[1]/div/p/strong")
+        numOfGoods = int(strong.text)
+        getGoodsInfo_3(fDirectory, count, numOfGoods)
+        
+        # 하의
+        url = "https://www.slowand.com/category/bottom/26/"
+        driver.get(url)
+        count = 0
+        strong = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[4]/div[1]/div/p/strong")
+        numOfGoods = int(strong.text)
+        getGoodsInfo_3(fDirectory, count, numOfGoods)
+        
+    if shopName == "리리앤코":
+        # category_list = 원피스, 블라우스, 아우터, 니트, 상의/티, 하의
+        category_list = ["https://ririnco.com/product/list.html?cate_no=53",
+                        "https://ririnco.com/product/list.html?cate_no=269",
+                        "https://ririnco.com/product/list.html?cate_no=56",
+                        "https://ririnco.com/product/list.html?cate_no=138",
+                         "https://ririnco.com/product/list.html?cate_no=55",
+                        "https://ririnco.com/product/list.html?cate_no=57"]
+        for url in category_list:
+            driver.get(url)
+            count = 0
+            strong = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[1]/div[6]/div[1]/div/p/strong")
+            numOfGoods = int(strong.text)
+            getGoodsInfo_4(fDirectory, count, numOfGoods)
+            
+    if shopName == "로렌하이":
+        # category_list = 아우터, 상의, 티셔츠, 블라우스/셔츠, 원피스, 바지, 스커트
+        category_list = ["http://laurenhi.com/product/list.html?cate_no=12",
+                         "http://laurenhi.com/product/list.html?cate_no=519",
+                        "http://laurenhi.com/product/list.html?cate_no=24",
+                        "http://laurenhi.com/product/list.html?cate_no=94",
+                        "http://laurenhi.com/product/list.html?cate_no=25",
+                         "http://laurenhi.com/product/list.html?cate_no=7",
+                         "http://laurenhi.com/product/list.html?cate_no=43"]
+        for url in category_list:
+            driver.get(url)
+            count = 0
+            strong = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[5]/div[1]/div/p/strong")
+            numOfGoods = int(strong.text)
+            getGoodsInfo_5(fDirectory, count, numOfGoods)
+            
     driver.quit()
     print("----- " + shopName + " Done! -----")
 
 
 # getGoodsLinks("육육걸즈")
 # getGoodsLinks("핫핑")
-getGoodsLinks("슬로우앤드")
+# getGoodsLinks("슬로우앤드")
 # getGoodsLinks("리리앤코")
-# getGoodsLinks("로렌하이")
+getGoodsLinks("로렌하이")
