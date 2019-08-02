@@ -55,6 +55,8 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         cell.cellImgView.image = UIImage(named: itemsImageFile[rowIndex])
         cell.cellTitleLabel.text = itemsTitle[rowIndex]
         cell.cellPriceLabel.text = itemsPrice[rowIndex] + "원"
+        cell.cellLikeBtn.setImage(cell.heartOn, for: UIControl.State.normal)
+        cell.isHeartOn = true
         cell.tableView = self
         
         return cell
@@ -133,8 +135,6 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     func deleteHeartOffCell(_ cell: TableViewCell) {
         let indexPath = favoriteListView.indexPath(for: cell)!
         let removeIndex = (indexPath as NSIndexPath).row
-        print("***********REMOVE INDEX*************\n")
-        print(String(removeIndex))
         
         itemsTitle.remove(at: removeIndex)
         itemsImageFile.remove(at: removeIndex)

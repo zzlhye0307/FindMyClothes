@@ -33,12 +33,7 @@ class TableViewCell: UITableViewCell {
     @IBAction func btnClicked(_ sender: UIButton) {
         if isHeartOn {
             cellLikeBtn.setImage(heartOff, for: UIControl.State.normal)
-            isHeartOn = false
             tableView?.deleteHeartOffCell(self)
-        }
-        else {
-            cellLikeBtn.setImage(heartOn, for: UIControl.State.normal)
-            isHeartOn = true
         }
     }
     
