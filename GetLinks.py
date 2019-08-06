@@ -257,8 +257,8 @@ def getGoodsInfo_5(fDirectory, numOfGoods):
             time.sleep(0.001)
             
 def getGoodsLinks(shopName):
-    fName = shopName + "상품정보"
-    fDirectory = "/Users/cs402a/Desktop/PythonFile/" + shopName + "/" + fName
+    fName = "상품정보"
+    fDirectory = "/Users/cs402a/Desktop/PythonFile/" + fName
     
     if shopName == "육육걸즈":
         # category_list = 아우터, 상의, 셔츠/블라우스, 팬츠/데님, 스커트, 원피스
