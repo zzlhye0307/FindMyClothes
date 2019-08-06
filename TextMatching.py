@@ -109,8 +109,6 @@ for i in range(len(products)):
             for k in range(4):
                 score_fabric[i][k] = -100
     print(str(i) + "번째 상품인 '" + title[i] + "'의 fabric score :" + str(score_fabric[i]))
-    #if (score_fabric[i][0] == 0) and (score_fabric[i][2] == 0) and (score_fabric[i][3] == 0) and (score_fabric[i][1] == 0):
-        #print(str(i) + "번째 상품 '" + title[i] + "'의 description :" + desc[i])
 
 # ----------------------------- pattern ------------------------------------
 score_pattern = []
@@ -155,6 +153,6 @@ for i in range(len(products)):
         if out_elements[j] in title[i]:
             for k in range(5):
                 score_pattern[i][k] = -100
+    if (score_pattern[i][0] == 0) and (score_pattern[i][2] == 0) and (score_pattern[i][3] == 0) and (score_pattern[i][1] == 0) and (score_pattern[i][4] == 0):
+        score_pattern[i][0] += 1
     print(str(i) + "번째 상품인 '" + title[i] + "'의 category score :" + str(score_category[i]))
-    #if (score_pattern[i][0] == 0) and (score_pattern[i][2] == 0) and (score_pattern[i][3] == 0) and (score_pattern[i][1] == 0) and (score_pattern[i][4] == 0):
-        #print(str(i) + "번째 상품 '" + title[i] + "'의 description :" + desc[i])
