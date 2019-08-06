@@ -155,4 +155,4 @@ for i in range(len(products)):
                 score_pattern[i][k] = -100
     if (score_pattern[i][0] == 0) and (score_pattern[i][2] == 0) and (score_pattern[i][3] == 0) and (score_pattern[i][1] == 0) and (score_pattern[i][4] == 0):
         score_pattern[i][0] += 1
-    print(str(i) + "번째 상품인 '" + title[i] + "'의 category score :" + str(score_category[i]))
+    print(str(i) + "번째 상품인 '" + title[i] + "'의 pattern score :" + str(score_category[i]))
