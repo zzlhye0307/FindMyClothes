@@ -117,10 +117,30 @@ class SearchResultViewController: UIViewController, UICollectionViewDelegate, UI
             try managedContext.insert(favoriteItem)
             try managedContext.save()
         } catch let error as NSError {
+            print("Insert")
             print("error : \(error)")
         }
     }
-
+    
+    func isItemAlreadyExisted(id: Int32) -> Bool {
+        var result: Bool = false
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return true
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
+        fetchRequest.predicate = NSPredicate(format: "id = %@", String(id))
+        
+        do {
+            let item = try managedContext.fetch(fetchRequest)
+            if item.count != 0 {
+                result = true
+            }
+        } catch let error as NSError {
+            print("error : \(error)")
+        }
+        return result
+    }
 }
 
 extension SearchResultViewController: UIGestureRecognizerDelegate {
@@ -134,24 +154,26 @@ extension SearchResultViewController: UIGestureRecognizerDelegate {
         else if (longPressGesture.state == UIGestureRecognizer.State.began) {
             let cellIndex = (indexPath! as NSIndexPath).row
 
-            let likeAlert = UIAlertController(title: "LIKE", message: "Favorite 에 등록되었습니다.", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil)
-            likeAlert.addAction(okAction)
-            present(likeAlert, animated: true, completion: nil)
-            
-            itemsTitle.append(searchItemsTitle[cellIndex])
-            itemsImageFile.append(searchItemsImageFile[cellIndex])
-            itemsPrice.append(searchItemsPrice[cellIndex])
-            itemsLink.append(searchItemsLink[cellIndex])
-            
-
             let id = Int32(searchItemsId[cellIndex])
             let title = searchItemsTitle[cellIndex]
             let price = searchItemsPrice[cellIndex]
             let link = searchItemsLink[cellIndex]
             let img = UIImage(named: searchItemsImageFile[cellIndex])?.pngData() as! NSData
             
-            insertItemToFavorite(id: id, title: title, price: price, link: link, img: img)
+            if isItemAlreadyExisted(id: id) {
+                let failAlert = UIAlertController(title: "LIKE", message: "이미 Favorite에 등록되어있는 상품입니다.", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil)
+                failAlert.addAction(okAction)
+                present(failAlert, animated: true, completion: nil)
+            }
+            else {
+                let likeAlert = UIAlertController(title: "LIKE", message: "Favorite 에 등록되었습니다.",    preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil)
+                likeAlert.addAction(okAction)
+                present(likeAlert, animated: true, completion: nil)
+            
+                insertItemToFavorite(id: id, title: title, price: price, link: link, img: img)
+            }
         }
     }
 }
