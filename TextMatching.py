@@ -6,16 +6,14 @@ with open("/Users/cs402a/Desktop/PythonFile/상품정보", "rt") as f:
 
 title = list()
 desc = list()
-for i in range(len(products)):
-    title.append(products[i].split("\'")[5])
-    desc.append(products[i].split("\'")[9])
-
-# ----------------------------- category ------------------------------------
-score_category = []
-for i in range(len(products)):
-    score_category.append([])
-    for j in range(5):
-        score_category[i].append(0)
+category = list()
+fabric = list()
+pattern = list()
+score_sum = list()
+variance = list()
+score_category = list()
+score_fabric = list()
+score_pattern = list()
 
 out_elements = ["SET", "set", "세트"]
 top_elements = ["맨투맨", "상의", "후드티", "후드T", "후드t", "맨투T", "맨투t", "헨리넥", "BL", "bl", "슬리브", "블라우스", "셔츠",
@@ -30,6 +28,40 @@ skirt_elements = ["스커트", "치마", "SK", "skirt", "sk", "롱sk", "롱SK", 
                   "니트 롱스커트", "롱-스커트", "미니-스커트", "데님-스커트", "치마바지", "스커트팬츠"]
 pants_elements = ["팬츠", "슬랙스", "숏츠", "SL", "sl", "바지", "쇼츠","PT", "pt", "니트팬츠", "jean", "JEAN", "블랙진", "일자P",
                   "일자진", "일자팬츠", "조거팬츠", "부츠P", "스키니"]
+
+cotton_elements = ["폴리", "코튼", "cotton", "린넨", "T", "BL", "bl", "BLOUSE", "blouse", "블라우스", "반팔T", "긴팔T", "박스T",
+                   "슬리브", "슬랙스", "맨투맨","mtm", "MTM", "맨투T", '후드T', "후드티", "헨리넥", "셔츠", "남방", "nb", "NB",
+                   "루즈T", "롱T", "크롭T", "트렌치", "야상", "자켓", "jk", "JK", "면소재","블랑", "쉬폰", "플리츠", "블랙진", "텐셀",
+                   "부츠컷P", "스키니P", "숏", "찰랑", "sk", "SK", "스커트", "면 소재", "팬츠", "sl", "SL", "원피스", "린넨원피스",
+                   "셔츠원피스", "ops", "OPS", "바지", "후드", "드레스", "dress", "스키니", "블랙스키니", "블랙 스키니", "스키니팬"]
+wool_elements = ["CD", "니트", "캐시미어", "캐시", "knit", "wool", "울니트", "가디건", "cd", "조끼", "헤링본", "트위드", "울", "앙고라",
+                 "울코트", "양털", "코트", "짜임", "니트스커트", "니트sk", "니트SK", "니트원피스", "니트롱", "니트드레스", "니트원피스"]
+leather_elements = ["가죽", "레더", "라이더", "rider", "라이더자켓", "레더무스탕", "레더스커트", "레더자켓", "leather"]
+denim_elements = ["중청", "연청", "청자켓", "청색", "진청", "청바지", "청남방", "흑청", "데님", "생지", "청치마", "denim", "데님P",
+                  "워싱", '데님숏', "데님sk", "데님SK", "데님스커트", "데님", "데님 스커트", "데님멜빵", "데님팬츠", "데님스키니", "데님숏츠",
+                  "데님바지", "jean", "JEAN", "데님스키니", "데님 스키니", "밴딩 팬츠", "밴딩팬", "스키니청바지", "워싱스키니", "생지스키"]
+
+checked_elements = ["체크", "check", "checked", "격자"]
+floral_elements = ["플로랄", "플라워", "꽃", "flower"]
+graphic_elements = ["프린팅", "레터링", "로고", "캐릭"]
+plain_elements = ["무지"]
+stripe_elements = ["스트라이프", "stripe", "줄무늬"]
+
+for i in range(len(products)):
+    title.append(products[i].split("\'")[5])
+    desc.append(products[i].split("\'")[9])
+
+    score_category.append([])
+    for j in range(5):
+        score_category[i].append(0)
+
+    score_fabric.append([])
+    for j in range(4):
+        score_fabric[i].append(0)
+
+    score_pattern.append([])
+    for j in range(5):
+        score_pattern[i].append(0)
 
 for i in range(len(products)):
     for j in range(len(top_elements)):
@@ -61,29 +93,7 @@ for i in range(len(products)):
         if out_elements[j] in title[i]:
             for k in range(5):
                 score_category[i][k] = -100
-    print(str(i) + "번째 상품인 '" + title[i] + "'의 category score :" + str(score_category[i]))
 
-# ----------------------------- fabric ------------------------------------
-score_fabric = []
-for i in range(len(products)):
-    score_fabric.append([])
-    for j in range(4):
-        score_fabric[i].append(0)
-
-cotton_elements = ["폴리", "코튼", "cotton", "린넨", "T", "BL", "bl", "BLOUSE", "blouse", "블라우스", "반팔T", "긴팔T", "박스T",
-                   "슬리브", "슬랙스", "맨투맨","mtm", "MTM", "맨투T", '후드T', "후드티", "헨리넥", "셔츠", "남방", "nb", "NB",
-                   "루즈T", "롱T", "크롭T", "트렌치", "야상", "자켓", "jk", "JK", "면소재","블랑", "쉬폰", "플리츠", "블랙진", "텐셀",
-                   "부츠컷P", "스키니P", "숏", "찰랑", "sk", "SK", "스커트", "면 소재", "팬츠", "sl", "SL", "원피스", "린넨원피스",
-                   "셔츠원피스", "ops", "OPS", "바지", "후드", "드레스", "dress", "스키니", "블랙스키니", "블랙 스키니", "스키니팬"]
-wool_elements = ["CD", "니트", "캐시미어", "캐시", "knit", "wool", "울니트", "가디건", "cd", "조끼", "헤링본", "트위드", "울", "앙고라",
-                 "울코트", "양털", "코트", "짜임", "니트스커트", "니트sk", "니트SK", "니트원피스", "니트롱", "니트드레스", "니트원피스"]
-leather_elements = ["가죽", "레더", "라이더", "rider", "라이더자켓", "레더무스탕", "레더스커트", "레더자켓", "leather"]
-denim_elements = ["중청", "연청", "청자켓", "청색", "진청", "청바지", "청남방", "흑청", "데님", "생지", "청치마", "denim", "데님P",
-                  "워싱", '데님숏', "데님sk", "데님SK", "데님스커트", "데님", "데님 스커트", "데님멜빵", "데님팬츠", "데님스키니", "데님숏츠",
-                  "데님바지", "jean", "JEAN", "데님스키니", "데님 스키니", "밴딩 팬츠", "밴딩팬", "스키니청바지", "워싱스키니", "생지스키"]
-
-
-for i in range(len(products)):
     for j in range(len(cotton_elements)):
         if cotton_elements[j] in title[i]:
             score_fabric[i][0] += 1
@@ -108,22 +118,7 @@ for i in range(len(products)):
         if out_elements[j] in title[i]:
             for k in range(4):
                 score_fabric[i][k] = -100
-    print(str(i) + "번째 상품인 '" + title[i] + "'의 fabric score :" + str(score_fabric[i]))
 
-# ----------------------------- pattern ------------------------------------
-score_pattern = []
-for i in range(len(products)):
-    score_pattern.append([])
-    for j in range(5):
-        score_pattern[i].append(0)
-
-checked_elements = ["체크", "check", "checked", "격자"]
-floral_elements = ["플로랄", "플라워", "꽃", "flower"]
-graphic_elements = ["프린팅", "레터링", "로고", "캐릭"]
-plain_elements = ["무지"]
-stripe_elements = ["스트라이프", "stripe", "줄무늬"]
-
-for i in range(len(products)):
     for j in range(len(checked_elements)):
         if checked_elements[j] in title[i]:
             score_pattern[i][0] += 1
@@ -154,5 +149,66 @@ for i in range(len(products)):
             for k in range(5):
                 score_pattern[i][k] = -100
     if (score_pattern[i][0] == 0) and (score_pattern[i][2] == 0) and (score_pattern[i][3] == 0) and (score_pattern[i][1] == 0) and (score_pattern[i][4] == 0):
-        score_pattern[i][0] += 1
-    print(str(i) + "번째 상품인 '" + title[i] + "'의 pattern score :" + str(score_category[i]))
+        score_pattern[i][3] += 1
+
+    sum = 0
+    max1 = 0
+    for j in range(1, 5):
+        if score_category[i][max1] < score_category[i][j]:
+            max1 = j
+    if max1 == 0:
+        category.append("top")
+    elif max1 == 1:
+        category.append("outer")
+    elif max1 == 2:
+        category.append("dress")
+    elif max1 == 3:
+        category.append("skirt")
+    else:
+        category.append("pants")
+    sum += score_category[i][max1]
+
+    max2 = 0
+    for j in range(1, 4):
+        if score_fabric[i][max2] < score_fabric[i][j]:
+            max2 = j
+    if max2 == 0:
+        fabric.append("cotton")
+    elif max2 == 1:
+        fabric.append("wool")
+    elif max2 == 2:
+        fabric.append("leather")
+    else:
+        fabric.append("denim")
+    sum += score_fabric[i][max2]
+
+    max3 = 0
+    for j in range(1, 5):
+        if score_pattern[i][max3] < score_pattern[i][j]:
+            max3 = j
+    if max3 == 0:
+        category.append("cheked")
+    elif max3 == 1:
+        category.append("floral")
+    elif max3 == 2:
+        category.append("graphic")
+    elif max3 == 3:
+        category.append("plain")
+    else:
+        category.append("stripe")
+    sum += score_pattern[i][max3]
+
+    score_sum.append(sum)
+
+    avg = float(sum)/3
+    var = pow(score_category[i][max1] - avg, 2) + pow(score_fabric[i][max2] - avg, 2) + pow(score_pattern[i][max3] - avg, 2)
+    variance.append(round(var, 2))
+
+    print(str(i) + "번째 상품의 category score :" + str(score_category[i]))
+    print(str(i) + "번째 상품의 fabric score :" + str(score_fabric[i]))
+    print(str(i) + "번째 상품의 pattern score :" + str(score_pattern[i]))
+    #print(str(i) + "번째 상품의 category : " + category[i])
+    #print(str(i) + "번째 상품의 fabric : " + fabric[i])
+    #print(str(i) + "번째 상품의 pattern : " + pattern[i])
+    #print(str(i) + "번째 상품의 score_sum : " + str(score_sum[i]))
+    print(str(i) + "번째 상품의 variance : " + str(variance[i]))
