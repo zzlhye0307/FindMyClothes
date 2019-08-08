@@ -66,6 +66,23 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "삭제"
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "logCell") as! RecentViewCell
+        let cell = tableView.cellForRow(at: indexPath) as! RecentViewCell
+        let category = cell.recentCategoryLbl.text!
+        let pattern = cell.recentPatternLbl.text!
+        let fabric = cell.recentFabricLbl.text!
+        
+        let resultView = self.storyboard?.instantiateViewController(withIdentifier: "searchResultView") as! SearchResultViewController
+        resultView.categoryResult = category
+        resultView.patternResult = pattern
+        resultView.fabricResult = fabric
+        present(resultView, animated: true, completion: nil)
+    }
     func fetchLogData() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -91,5 +108,17 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } catch let error as NSError {
             print("error: \(error)")
         }
+    }
+    
+    @IBAction func editBtnPressed(_ sender: UIBarButtonItem) {
+        if recentView.isEditing {
+            sender.title = "Edit"
+            recentView.setEditing(false, animated: true)
+        }
+        else {
+            sender.title = "Done"
+            recentView.setEditing(true, animated: true)
+        }
+
     }
 }

@@ -186,7 +186,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "삭제"
     }
-    
+/*
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let moveIndex = (sourceIndexPath as NSIndexPath).row
         /*
@@ -211,6 +211,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         */
         storedFavoriteItems.insert(itemToMove, at: toIndex)
     }
+ */
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let rowIndex = (indexPath as NSIndexPath).row

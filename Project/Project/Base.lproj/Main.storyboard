@@ -170,7 +170,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="검색 기록" id="Ucc-yB-z6D">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="QLz-cO-Hbd"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Edit" id="QLz-cO-Hbd">
+                                            <connections>
+                                                <action selector="editBtnPressed:" destination="47M-j7-gRL" id="bi5-B5-HvE"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>

@@ -31,7 +31,24 @@ class SearchResultViewController: UIViewController, UICollectionViewDelegate, UI
     var patternResult = ""
     var fabricResult = ""
     @IBOutlet var searchResultView: UICollectionView!
-
+    
+    /*nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?*/
+/*
+    init(){
+        super.init(nibName: nil, bundle: nil)
+    }
+        
+    init(category: String, pattern: String, fabric: String) {
+        super.init(nibName: nil, bundle: nil)
+        categoryResult = category
+        patternResult = pattern
+        fabricResult = fabric
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+*/
     override func viewDidLoad() {
         super.viewDidLoad()
         searchResultView.delegate = self

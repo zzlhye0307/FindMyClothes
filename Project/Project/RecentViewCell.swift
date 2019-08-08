@@ -20,10 +20,11 @@ class RecentViewCell: UITableViewCell {
         // Initialization code
     }
 
+    // Cell 선택되면 해당 라벨들 넣어서 다시 한 번 검색 진행하도록
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        //present(resultView!, animated: true, completion: nil)
         // Configure the view for the selected state
     }
-
+    
 }
