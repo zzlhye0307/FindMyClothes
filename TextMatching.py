@@ -4,13 +4,19 @@ import numpy as np
 with open("/Users/cs402a/Desktop/PythonFile/상품정보", "rt") as f:
     products = f.readlines()
 
+'''
+link = list()
+img = list()
 title = list()
+price = list()
 desc = list()
 category = list()
 fabric = list()
 pattern = list()
 score_sum = list()
 variance = list()
+w_desc = list()
+'''
 score_category = list()
 score_fabric = list()
 score_pattern = list()
@@ -48,9 +54,6 @@ plain_elements = ["무지"]
 stripe_elements = ["스트라이프", "stripe", "줄무늬"]
 
 for i in range(len(products)):
-    title.append(products[i].split("\'")[5])
-    desc.append(products[i].split("\'")[9])
-
     score_category.append([])
     for j in range(5):
         score_category[i].append(0)
@@ -64,88 +67,95 @@ for i in range(len(products)):
         score_pattern[i].append(0)
 
 for i in range(len(products)):
+    link = products[i].split("\'")[1]
+    img = products[i].split("\'")[3]
+    title = products[i].split("\'")[5]
+    price = products[i].split("\'")[7]
+    desc = products[i].split("\'")[9]
+
+
     for j in range(len(top_elements)):
-        if top_elements[j] in title[i]:
+        if top_elements[j] in title:
             score_category[i][0] += 1
-        if top_elements[j] in desc[i]:
+        if top_elements[j] in desc:
             score_category[i][0] += 1
     for j in range(len(outer_elements)):
-        if outer_elements[j] in title[i]:
+        if outer_elements[j] in title:
             score_category[i][1] += 1
-        if outer_elements[j] in desc[i]:
+        if outer_elements[j] in desc:
             score_category[i][1] += 1
     for j in range(len(dress_elements)):
-        if dress_elements[j] in title[i]:
+        if dress_elements[j] in title:
             score_category[i][2] += 1
-        if dress_elements[j] in desc[i]:
+        if dress_elements[j] in desc:
             score_category[i][2] += 1
     for j in range(len(skirt_elements)):
-        if skirt_elements[j] in title[i]:
+        if skirt_elements[j] in title:
             score_category[i][3] += 1
-        if skirt_elements[j] in desc[i]:
+        if skirt_elements[j] in desc:
             score_category[i][3] += 1
     for j in range(len(pants_elements)):
-        if pants_elements[j] in title[i]:
+        if pants_elements[j] in title:
             score_category[i][4] += 1
-        if pants_elements[j] in desc[i]:
+        if pants_elements[j] in desc:
             score_category[i][4] += 1
     for j in range(len(out_elements)):
-        if out_elements[j] in title[i]:
+        if out_elements[j] in title:
             for k in range(5):
                 score_category[i][k] = -100
 
     for j in range(len(cotton_elements)):
-        if cotton_elements[j] in title[i]:
+        if cotton_elements[j] in title:
             score_fabric[i][0] += 1
-        if cotton_elements[j] in desc[i]:
+        if cotton_elements[j] in desc:
             score_fabric[i][0] += 1
     for j in range(len(wool_elements)):
-        if wool_elements[j] in title[i]:
+        if wool_elements[j] in title:
             score_fabric[i][1] += 1
-        if wool_elements[j] in desc[i]:
+        if wool_elements[j] in desc:
             score_fabric[i][1] += 1
     for j in range(len(leather_elements)):
-        if leather_elements[j] in title[i]:
+        if leather_elements[j] in title:
             score_fabric[i][2] += 1
-        if leather_elements[j] in desc[i]:
+        if leather_elements[j] in desc:
             score_fabric[i][2] += 1
     for j in range(len(denim_elements)):
-        if denim_elements[j] in title[i]:
+        if denim_elements[j] in title:
             score_fabric[i][3] += 1
-        if denim_elements[j] in desc[i]:
+        if denim_elements[j] in desc:
             score_fabric[i][3] += 1
     for j in range(len(out_elements)):
-        if out_elements[j] in title[i]:
+        if out_elements[j] in title:
             for k in range(4):
                 score_fabric[i][k] = -100
 
     for j in range(len(checked_elements)):
-        if checked_elements[j] in title[i]:
+        if checked_elements[j] in title:
             score_pattern[i][0] += 1
-        if checked_elements[j] in desc[i]:
+        if checked_elements[j] in desc:
             score_pattern[i][0] += 1
     for j in range(len(floral_elements)):
-        if floral_elements[j] in title[i]:
+        if floral_elements[j] in title:
             score_pattern[i][1] += 1
-        if floral_elements[j] in desc[i]:
+        if floral_elements[j] in desc:
             score_pattern[i][1] += 1
     for j in range(len(graphic_elements)):
-        if graphic_elements[j] in title[i]:
+        if graphic_elements[j] in title:
             score_pattern[i][2] += 1
-        if graphic_elements[j] in desc[i]:
+        if graphic_elements[j] in desc:
             score_pattern[i][2] += 1
     for j in range(len(plain_elements)):
-        if plain_elements[j] in title[i]:
+        if plain_elements[j] in title:
             score_pattern[i][3] += 1
-        if plain_elements[j] in desc[i]:
+        if plain_elements[j] in desc:
             score_pattern[i][3] += 1
     for j in range(len(stripe_elements)):
-        if stripe_elements[j] in title[i]:
+        if stripe_elements[j] in title:
             score_pattern[i][4] += 1
-        if stripe_elements[j] in desc[i]:
+        if stripe_elements[j] in desc:
             score_pattern[i][4] += 1
     for j in range(len(out_elements)):
-        if out_elements[j] in title[i]:
+        if out_elements[j] in title:
             for k in range(5):
                 score_pattern[i][k] = -100
     if (score_pattern[i][0] == 0) and (score_pattern[i][2] == 0) and (score_pattern[i][3] == 0) and (score_pattern[i][1] == 0) and (score_pattern[i][4] == 0):
@@ -157,15 +167,15 @@ for i in range(len(products)):
         if score_category[i][max1] < score_category[i][j]:
             max1 = j
     if max1 == 0:
-        category.append("top")
+        category = "top"
     elif max1 == 1:
-        category.append("outer")
+        category = "outer"
     elif max1 == 2:
-        category.append("dress")
+        category = "dress"
     elif max1 == 3:
-        category.append("skirt")
+        category = "skirt"
     else:
-        category.append("pants")
+        category = "pants"
     sum += score_category[i][max1]
 
     max2 = 0
@@ -173,13 +183,13 @@ for i in range(len(products)):
         if score_fabric[i][max2] < score_fabric[i][j]:
             max2 = j
     if max2 == 0:
-        fabric.append("cotton")
+        fabric = "cotton"
     elif max2 == 1:
-        fabric.append("wool")
+        fabric = "wool"
     elif max2 == 2:
-        fabric.append("leather")
+        fabric = "leather"
     else:
-        fabric.append("denim")
+        fabric = "denim"
     sum += score_fabric[i][max2]
 
     max3 = 0
@@ -187,28 +197,25 @@ for i in range(len(products)):
         if score_pattern[i][max3] < score_pattern[i][j]:
             max3 = j
     if max3 == 0:
-        category.append("cheked")
+        pattern = "checked"
     elif max3 == 1:
-        category.append("floral")
+        pattern = "floral"
     elif max3 == 2:
-        category.append("graphic")
+        pattern = "graphic"
     elif max3 == 3:
-        category.append("plain")
+        pattern = "plain"
     else:
-        category.append("stripe")
+        pattern = "stripe"
     sum += score_pattern[i][max3]
-
-    score_sum.append(sum)
 
     avg = float(sum)/3
     var = pow(score_category[i][max1] - avg, 2) + pow(score_fabric[i][max2] - avg, 2) + pow(score_pattern[i][max3] - avg, 2)
-    variance.append(round(var, 2))
+    variance = round(var, 2)
 
-    print(str(i) + "번째 상품의 category score :" + str(score_category[i]))
-    print(str(i) + "번째 상품의 fabric score :" + str(score_fabric[i]))
-    print(str(i) + "번째 상품의 pattern score :" + str(score_pattern[i]))
-    #print(str(i) + "번째 상품의 category : " + category[i])
-    #print(str(i) + "번째 상품의 fabric : " + fabric[i])
-    #print(str(i) + "번째 상품의 pattern : " + pattern[i])
-    #print(str(i) + "번째 상품의 score_sum : " + str(score_sum[i]))
-    print(str(i) + "번째 상품의 variance : " + str(variance[i]))
+    fDirectory = "/Users/cs402a/Desktop/PythonFile/MatchedProducts"
+    w_desc = str(i), category, fabric, pattern, sum, variance
+    print(str(w_desc))
+
+    with open(fDirectory, "a") as f:
+        f.write(str(w_desc))
+        f.write("\n")
