@@ -213,7 +213,7 @@ for i in range(len(products)):
     variance = round(var, 2)
 
     fDirectory = "/Users/cs402a/Desktop/PythonFile/MatchedProducts"
-    w_desc = str(i), category, fabric, pattern, sum, variance
+    w_desc = str(i), category, fabric, pattern, str(sum), str(variance)
     print(str(w_desc))
 
     with open(fDirectory, "a") as f:
