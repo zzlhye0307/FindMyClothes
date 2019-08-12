@@ -197,10 +197,9 @@ for i in range(len(products)):
 
     avg = float(sum)/3
     var = pow(score_category[i][max1] - avg, 2) + pow(score_fabric[i][max2] - avg, 2) + pow(score_pattern[i][max3] - avg, 2)
-    variance = round(var, 2)
 
     fDirectory = "/Users/cs402a/Desktop/PythonFile/MatchedProducts"
-    w_desc = category, fabric, pattern, str(sum), str(variance)
+    w_desc = category, fabric, pattern, str(sum), str(int(var))
     print(str(w_desc))
 
     with open(fDirectory, "a") as f:
