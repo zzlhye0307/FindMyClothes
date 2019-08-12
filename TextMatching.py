@@ -4,19 +4,6 @@ import numpy as np
 with open("/Users/cs402a/Desktop/PythonFile/상품정보", "rt") as f:
     products = f.readlines()
 
-'''
-link = list()
-img = list()
-title = list()
-price = list()
-desc = list()
-category = list()
-fabric = list()
-pattern = list()
-score_sum = list()
-variance = list()
-w_desc = list()
-'''
 score_category = list()
 score_fabric = list()
 score_pattern = list()
