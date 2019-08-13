@@ -11,7 +11,7 @@ with open('/home/ubuntu/Desktop/MatchedProducts', "rt") as f:
     labels = f.readlines()
 
 with table.batch_writer() as batch:
-    for i in range(6000, 6716):
+    for i in range(0, len(products)):
         batch.put_item(
             Item={
                 'id': i,
