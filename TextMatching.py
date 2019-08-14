@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 
-with open("/Users/cs402a/Desktop/PythonFile/상품정보", "rt") as f:
+with open("/Users/cs402a/Desktop/PythonFile/MatchedProducts", "rt") as f:
     products = f.readlines()
 
 score_category = list()
