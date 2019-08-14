@@ -1,0 +1,97 @@
+#! /usr/bin/python
+# -*- coding: utf-8 -*-
+from selenium import webdriver
+import numpy as np
+import datetime
+
+path = "/Users/cs402a/Desktop/chromedriver"
+driver = webdriver.Chrome(path)
+now = datetime.datetime.now()
+fDirectory = "/Users/cs402a/Desktop/PythonFile/" + now.strftime('%Y-%m-%d')
+
+def GetNewProducts():
+    #육육걸즈
+    url = "https://66girls.co.kr/product/list.html?cate_no=76"
+    driver.get(url)
+    xpath = "/html/body/div[4]/div[2]/div[2]/div[2]/div[1]/div/p/strong"
+    numOfGoods = int(driver.find_element_by_xpath(xpath).text)
+    count = 0
+    page = 1
+    for i in range(1, numOfGoods):
+        try:
+            if count < 64:
+                count = count + 1
+                a = driver.find_element_by_xpath(
+                    "/html/body/div[4]/div[2]/div[2]/div[2]/div[4]/ul/li[" + str(i) + "]/div/div[1]/div/a")
+                link = a.get_attribute("href")
+                img = driver.find_element_by_xpath(
+                    "/html/body/div[4]/div[2]/div[2]/div[2]/div[4]/ul/li[" + str(i) + "]/div/div[1]/div/a/img")
+                image = img.get_attribute("src")
+                span1 = driver.find_element_by_xpath(
+                    "/html/body/div[4]/div[2]/div[2]/div[2]/div[4]/ul/li[" + str(i) + "]/div/div[2]/strong/a/span[2]")
+                title = span1.text
+                span2 = driver.find_element_by_xpath(
+                    "/html/body/div[4]/div[2]/div[2]/div[2]/div[4]/ul/li[" + str(i) + "]/div/div[2]/ul/li[1]/span[1]")
+                price = span2.text
+                span3 = driver.find_element_by_xpath(
+                    "/html/body/div[4]/div[2]/div[2]/div[2]/div[4]/ul/li[" + str(i) + "]/div/div[2]/ul/li[3]/span")
+                description = span3.text
+
+                w_desc = link, image, title, price, description
+
+                with open(fDirectory, "a", encoding="utf-8") as f:
+                    f.write(str(w_desc))
+                    f.write("\n")
+            else:
+                count = 0
+                page = page + 1
+                next_button = driver.find_element_by_xpath(
+                    "/html/body/div[4]/div[2]/div[2]/div[3]/ol/li[" + str(page) + "]/a")
+                next_page_url = next_button.get_attribute("href")
+                driver.get(next_page_url)
+        except:
+            print("error1")
+    
+    #핫핑
+    url = "http://hotping.co.kr/product/list.html?cate_no=25"
+    driver.get(url)
+    xpath = "//*[@id=\"contents0\"]/div[2]/div[1]/div/strong"
+    numOfGoods = int(driver.find_element_by_xpath(xpath).text)
+    count = 0
+    page = 1
+    for i in range(1, numOfGoods):
+        try:
+            if count < 60:
+                a = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/ul/li[" + str(i) + "]/div/div[1]/a")
+                link = a.get_attribute("href")
+                img =driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/ul/li[" + str(i) + "]/div/div[1]/a/img")
+                image = img.get_attribute("src")
+                span1 = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/ul/li[" + str(i) + "]/div/p/a/span")
+                title = span1.text
+                span2 = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/ul/li[" + str(i) + "]/div/ul/li[1]/span")
+                price = span2.text
+                try:
+                    span3 = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/ul/li[" + str(i) + "]/div/ul/li[3]/span")
+                except:
+                    span3 = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/ul/li[" + str(i) + "]/div/ul/li[4]/span")
+                description = span3.text
+                
+                w_desc = link, image, title, price, description
+                
+                with open(fDirectory, "a", encoding="utf-8") as f:
+                    f.write(str(w_desc))
+            else:
+                count = 0
+                page += 1
+                next_button = driver.find_element_by_xpath("//*[@id=\"contents0\"]/div[3]/ol/li[" + str(page) + "]/a")
+                next_page_url = next_button.get_attribute("href")
+                driver.get(next_page_url)
+        except:
+            print("error2")
+            
+def MatchText():
+    
+
+GetNewProducts()
+driver.quit()
+MatchText()
