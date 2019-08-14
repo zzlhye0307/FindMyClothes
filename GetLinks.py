@@ -43,7 +43,7 @@ def getGoodsInfo_1(fDirectory, numOfGoods):
                                 count) + "]/div/div[2]/ul/li[2]/span")
                     description = span3.text
                 except:
-                    description = ""
+                    description = "Null"
 
                 w_desc = link, image, title, price, description
                 print(title)
