@@ -267,10 +267,17 @@ def NewInsertToDB():
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('Products')
 
+    with open("/home/ubuntu/Desktop/NumOfItems.txt", "rt") as f:
+        numOfItems = f.readline()
+        
+    id = int(numOfItems)
+
+    
     with table.batch_writer() as batch:
-        for i in range(0, 1):
+        for i in range(len(products)):
             batch.put_item(
                 Item={
+                    'id': id,
                     'link': products[i][0],
                     'img': products[i][1],
                     'title': products[i][2],
@@ -282,6 +289,10 @@ def NewInsertToDB():
                     'variance': int(labels[i][4])
                 }
             )
+            id += 1
+            
+    with open("/home/ubuntu/Desktop/NumOfItems.txt", "w") as f:
+        f.write(str(id))
 
 GetNewProducts()
 MatchText()
