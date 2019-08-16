@@ -73,14 +73,24 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "logCell") as! RecentViewCell
         let cell = tableView.cellForRow(at: indexPath) as! RecentViewCell
-        let category = cell.recentCategoryLbl.text!
-        let pattern = cell.recentPatternLbl.text!
+        let category = cell.recentCategoryLbl.text!.lowercased()
+        let pattern = cell.recentPatternLbl.text!.lowercased()
         let fabric = cell.recentFabricLbl.text!
         
         let resultView = self.storyboard?.instantiateViewController(withIdentifier: "searchResultView") as! SearchResultViewController
+        /*
         resultView.categoryResult = category
         resultView.patternResult = pattern
         resultView.fabricResult = fabric
+        */
+        isFinished = false
+        let item = Products()
+        item?.scanItems(category: category, pattern: pattern, fabric: fabric)
+        while (!isFinished) {
+            print("while: \(isFinished)")
+            Thread.sleep(forTimeInterval: 0.1)
+        }
+        print("#3 : \(testId.count)")
         present(resultView, animated: true, completion: nil)
     }
     func fetchLogData() {

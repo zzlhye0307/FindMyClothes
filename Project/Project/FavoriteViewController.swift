@@ -170,13 +170,6 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         let rowIndex = (indexPath as NSIndexPath).row
         
         if editingStyle == .delete {
-            /*
-            itemsTitle.remove(at: rowIndex)
-            itemsImageFile.remove(at: rowIndex)
-            itemsPrice.remove(at: rowIndex)
-            itemsLink.remove(at: rowIndex)
-            */
-//            storedFavoriteItems.remove(at: rowIndex)
             deleteData(index: rowIndex)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -186,32 +179,6 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "삭제"
     }
-/*
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let moveIndex = (sourceIndexPath as NSIndexPath).row
-        /*
-        let itemToMove = itemsTitle[moveIndex]
-        let itemImageToMove = itemsImageFile[moveIndex]
-        let itemPrice = itemsPrice[moveIndex]
-        let itemLink = itemsLink[moveIndex]
-        itemsTitle.remove(at: moveIndex)
-        itemsImageFile.remove(at: moveIndex)
-        itemsPrice.remove(at: moveIndex)
-        itemsLink.remove(at: moveIndex)
-        */
-        let itemToMove = storedFavoriteItems[moveIndex]
-        storedFavoriteItems.remove(at: moveIndex)
-
-        let toIndex = (destinationIndexPath as NSIndexPath).row
-        /*
-        itemsTitle.insert(itemToMove, at: toIndex)
-        itemsImageFile.insert(itemImageToMove, at: toIndex)
-        itemsPrice.insert(itemPrice, at: toIndex)
-        itemsLink.insert(itemLink, at: toIndex)
-        */
-        storedFavoriteItems.insert(itemToMove, at: toIndex)
-    }
- */
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let rowIndex = (indexPath as NSIndexPath).row

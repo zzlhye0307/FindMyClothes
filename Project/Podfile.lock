@@ -1,0 +1,119 @@
+PODS:
+  - AWSAuthCore (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSAutoScaling (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSCloudWatch (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSCognito (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSCognitoIdentityProvider (2.6.35):
+    - AWSCognitoIdentityProviderASF (= 1.0.1)
+    - AWSCore (= 2.6.35)
+  - AWSCognitoIdentityProviderASF (1.0.1)
+  - AWSCore (2.6.35)
+  - AWSDynamoDB (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSEC2 (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSElasticLoadBalancing (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSIoT (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSKinesis (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSLambda (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSMachineLearning (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSMobileAnalytics (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSMobileClient (2.6.35):
+    - AWSAuthCore (= 2.6.35)
+  - AWSS3 (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSSES (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSSimpleDB (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSSNS (2.6.35):
+    - AWSCore (= 2.6.35)
+  - AWSSQS (2.6.35):
+    - AWSCore (= 2.6.35)
+  - SDWebImage (5.1.0):
+    - SDWebImage/Core (= 5.1.0)
+  - SDWebImage/Core (5.1.0)
+
+DEPENDENCIES:
+  - AWSAutoScaling
+  - AWSCloudWatch
+  - AWSCognito
+  - AWSCognitoIdentityProvider
+  - AWSDynamoDB
+  - AWSEC2
+  - AWSElasticLoadBalancing
+  - AWSIoT
+  - AWSKinesis
+  - AWSLambda
+  - AWSMachineLearning
+  - AWSMobileAnalytics
+  - AWSMobileClient (~> 2.6.13)
+  - AWSS3
+  - AWSSES
+  - AWSSimpleDB
+  - AWSSNS
+  - AWSSQS
+  - SDWebImage (~> 5.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AWSAuthCore
+    - AWSAutoScaling
+    - AWSCloudWatch
+    - AWSCognito
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSDynamoDB
+    - AWSEC2
+    - AWSElasticLoadBalancing
+    - AWSIoT
+    - AWSKinesis
+    - AWSLambda
+    - AWSMachineLearning
+    - AWSMobileAnalytics
+    - AWSMobileClient
+    - AWSS3
+    - AWSSES
+    - AWSSimpleDB
+    - AWSSNS
+    - AWSSQS
+    - SDWebImage
+
+SPEC CHECKSUMS:
+  AWSAuthCore: 386e045a341acebf2409425467e907ae1a45ed63
+  AWSAutoScaling: aeca3248435eb7d8be83cf57cd6a6cdfe3a3de22
+  AWSCloudWatch: cb7ef11eaacfea695abaef247c0f3a7c9a1a8184
+  AWSCognito: 6b96ae976b5f59881c1bb406e0c7d08494651dee
+  AWSCognitoIdentityProvider: 0a041bd229a105d73f3a4d7eb90f696f1b5bd422
+  AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
+  AWSCore: 2dab62ef2e5ca5d8c72c6cbdb3a6ea1532c27c2b
+  AWSDynamoDB: f4902fc37384dcf9547e2d8a32a5b208d4d1d996
+  AWSEC2: 5876bf9f37213cd9980a4113669931f0667056e4
+  AWSElasticLoadBalancing: 827d3cd88bd7719af080c4a0b08679a89ff9fbba
+  AWSIoT: c5deed4e2488e55d00554eca75e52f5d5ececd7b
+  AWSKinesis: 83996e98972f4988ca7cd9a35e86984f45b9a450
+  AWSLambda: 60b52f6445e99810c991294c51215f9b171e7d0e
+  AWSMachineLearning: fde237a408e43325105aae0a3db0e4ccedfed68f
+  AWSMobileAnalytics: b53f8a8d8f2eb8d6e9d8c6269c0ba7fd9494a9cd
+  AWSMobileClient: f89a36e0d95fc354a9d3b50d347371788c542449
+  AWSS3: 282a590bb47e9cd88de24979fb28954399c41c52
+  AWSSES: 0e990e7e1430e3fc0b08d57496d178461709dae4
+  AWSSimpleDB: cb495b9a8ec2b9d5227b19b58ed67b18f2392b9b
+  AWSSNS: 61e5fa0ba7b7ade784af68400acb6c66c990a996
+  AWSSQS: 149383dbe40c8eddf5a8d08cc93b2b401fc6307e
+  SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
+
+PODFILE CHECKSUM: 88d06699bb54d4cf5549d1c689472b7884f72e63
+
+COCOAPODS: 1.7.5

@@ -8,17 +8,39 @@
 
 import UIKit
 import CoreData
+import AWSCore
+import AWSMobileClient
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//        let identityPoolId = "ap-northeast-2:478fcc0d-dc57-4a4b-b797-b39cd91aa954"
         // Override point for customization after application launch.
+        
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.APNortheast2, identityPoolId:"ap-northeast-2:478fcc0d-dc57-4a4b-b797-b39cd91aa954")
+        
+        let configuration = AWSServiceConfiguration(region:.APNortheast2, credentialsProvider:credentialsProvider)
+        
+        AWSServiceManager.default()?.defaultServiceConfiguration = configuration
+        
+        credentialsProvider.getIdentityId().continueOnSuccessWith(block: { (task) -> AnyObject? in
+            if task.error != nil {
+                print("Error: " + task.error!.localizedDescription)
+            }
+            else {
+                let cognitoId = task.result!
+                print("Cognito id : \(cognitoId)")
+            }
+            return task;
+        })
         Thread.sleep(forTimeInterval: 0.5)
-        return true
+        AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
+        AWSDDLog.sharedInstance.logLevel = .info
+  
+        return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

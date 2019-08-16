@@ -283,10 +283,18 @@ class ViewController: UIViewController {
             let okAction = UIAlertAction(title: "네", style: UIAlertAction.Style.default, handler: {
                 ACTION in
                 self.isMoved = true
-                let resultView = self.storyboard?.instantiateViewController(withIdentifier: "searchResultView")
-                resultView?.modalTransitionStyle = UIModalTransitionStyle.coverVertical
-            
-                self.present(resultView!, animated: true, completion: nil)
+                let resultView = self.storyboard?.instantiateViewController(withIdentifier: "searchResultView") as! SearchResultViewController
+                resultView.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+                isFinished = false
+                let item = Products()
+                item?.scanItems(category: self.category!.lowercased(), pattern: self.pattern!.lowercased(), fabric: self.fabric!)
+                while (!isFinished) {
+                    print("while: \(isFinished)")
+                    Thread.sleep(forTimeInterval: 0.1)
+                }
+                print("#3 : \(testId.count)")
+
+                self.present(resultView, animated: true, completion: nil)
                 self.changeBtnState(self.searchMode)
                 self.insertLog()
             })
@@ -301,7 +309,7 @@ class ViewController: UIViewController {
             self.present(confirmAlarm, animated: true, completion: nil)
         }
     }
-    
+
     func insertLog() {
         var imgData: NSData?
         let date: Date = Date()

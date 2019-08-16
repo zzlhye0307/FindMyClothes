@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SDWebImage
 
 var searchItemsId = [101, 102, 103, 104, 105, 106, 107, 108, 109, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017]
 var searchItemsTitle = ["[이즈] 린넨 밴딩 팬츠 [베이지]", "[시티브리즈] 브리즈 슬림 원피스 블랙", "[로맨틱크라운] Stripe Cardigan_Yellow", "[카인드라운지] 글로우 새틴 미디 스커트_카키", "[로맨틱크라운] GNAC Skirt Short_Purple", "[오드원아웃] 하트 참 원피스_블랙", "[바이바이섭] V-NECK PUFF SHIRTS BLUE", "[어낫띵] DROP_SHOULDER SANTA SWEAT_SHIRT", "[스컬프터] [SSS]글리터 니트 크롭 티[멀티 피치]", "[오드원아웃] 플라워 스퀘어 넥_핑크"]
@@ -26,59 +27,62 @@ var searchItemsLink = [
     "https://wusinsa.musinsa.com/app/product/detail/1029573/0"
 ]
 
+var testId: [Int] = []
+var testTitle: [String] = []
+var testPrice: [String] = []
+var testImgLink: [String] = []
+var testLink: [String] = []
+var isFinished: Bool = false
+
 class SearchResultViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     var categoryResult = ""
     var patternResult = ""
     var fabricResult = ""
     @IBOutlet var searchResultView: UICollectionView!
     
-    /*nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?*/
-/*
-    init(){
-        super.init(nibName: nil, bundle: nil)
-    }
-        
-    init(category: String, pattern: String, fabric: String) {
-        super.init(nibName: nil, bundle: nil)
-        categoryResult = category
-        patternResult = pattern
-        fabricResult = fabric
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-*/
     override func viewDidLoad() {
         super.viewDidLoad()
         searchResultView.delegate = self
         searchResultView.dataSource = self
-
+        print("search result view")
+        print("category: \(categoryResult), pattern: \(patternResult), fabric: \(fabricResult)")
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(SearchResultViewController.handleLongPress))
         longPress.minimumPressDuration = 0.5
         longPress.delegate = self
         searchResultView.addGestureRecognizer(longPress)
     }
     
+    func getMatchedData() {
+        categoryResult = categoryResult.lowercased()
+        patternResult = patternResult.lowercased()
+        let product = Products()
+        product?.scanItems(category: categoryResult, pattern: patternResult, fabric: fabricResult)
+    }
+
+    
     /* return the number of collection cells */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchItemsTitle.count
+//        getMatchedData()
+//        return searchItemsTitle.count
+        print("at searchView \(testId.count)")
+        return testId.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = searchResultView.dequeueReusableCell(withReuseIdentifier: "resultCell", for: indexPath) as! CollectionViewCell
         let cellIndex = (indexPath as NSIndexPath).row
         
-        cell.cellImageView.image = UIImage(named: searchItemsImageFile[cellIndex])
-        cell.cellTitleLabel.text = searchItemsTitle[cellIndex]
-        cell.cellPriceLabel.text = searchItemsPrice[cellIndex] + "원"
+        cell.cellTitleLabel.text = testTitle[cellIndex]
+        cell.cellImageView!.sd_setImage(with: URL(string: testImgLink[cellIndex]))
+        cell.cellPriceLabel.text = testPrice[cellIndex]
 
         return cell
     }
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cellIndex = (indexPath as NSIndexPath).row
-        let urlLink = searchItemsLink[cellIndex]
+        
+        let urlLink = testLink[cellIndex]
         
         openURL(urlLink)
     }
