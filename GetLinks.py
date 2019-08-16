@@ -43,7 +43,7 @@ def getGoodsInfo_1(fDirectory, numOfGoods):
                                 count) + "]/div/div[2]/ul/li[2]/span")
                     description = span3.text
                 except:
-                    description = ""
+                    description = "Null"
 
                 w_desc = link, image, title, price, description
                 print(title)
@@ -257,7 +257,7 @@ def getGoodsInfo_5(fDirectory, numOfGoods):
             time.sleep(0.001)
             
 def getGoodsLinks(shopName):
-    fName = "상품정보"
+    fName = "ProductsInfo"
     fDirectory = "/Users/cs402a/Desktop/PythonFile/" + fName
     
     if shopName == "육육걸즈":
