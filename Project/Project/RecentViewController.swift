@@ -120,6 +120,18 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    func deleteAll() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        fetchLogData()
+        for log in userLog {
+            managedContext.delete(log)
+        }
+        try! managedContext.save()
+    }
+    
     @IBAction func editBtnPressed(_ sender: UIBarButtonItem) {
         if recentView.isEditing {
             sender.title = "Edit"

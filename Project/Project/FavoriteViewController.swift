@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import SDWebImage
+import SDWebImageWebPCoder
 
 var storedFavoriteItems: [NSManagedObject] = []
 
@@ -56,12 +58,14 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
             let title = myItem.title
             let price = myItem.price
             let link = myItem.link
-            let img = myItem.img
+            let imgLink = myItem.imgLink
+//            let img = myItem.img
             print("id: \(id)")
             print("title: \(title!)")
             print("price: \(price!)")
             print("link: \(link!)")
-            print("img: \(img!)")
+            print("image link: \(imgLink)")
+//            print("img: \(img!)")
         }
      }
     
@@ -152,9 +156,10 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         
         let favorite = storedFavoriteItems[rowIndex] as! Favorite
         
-        cell.cellImgView.image = UIImage(data: favorite.img!)
+//        cell.cellImgView.image = UIImage(data: favorite.img!)
+        cell.cellImgView.sd_setImage(with: URL(string: favorite.imgLink!))
         cell.cellTitleLabel.text = favorite.title
-        cell.cellPriceLabel.text = favorite.price! + "원"
+        cell.cellPriceLabel.text = favorite.price!
         cell.cellLikeBtn.setImage(cell.heartOn, for: UIControl.State.normal)
         cell.isHeartOn = true
         cell.tableView = self

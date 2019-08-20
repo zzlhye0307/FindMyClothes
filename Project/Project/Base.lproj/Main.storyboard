@@ -199,32 +199,6 @@
             </objects>
             <point key="canvasLocation" x="1544.9275362318842" y="122.28260869565219"/>
         </scene>
-        <!--View Controller2-->
-        <scene sceneID="I37-Sb-xGT">
-            <objects>
-                <viewController id="yAb-J9-ycK" customClass="ViewController2" customModule="Project" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="tgg-ba-UKA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Lw-tN-NIv">
-                                <rect key="frame" x="41" y="74" width="327" height="323"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="0UC-NP-GMw"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" systemItem="more" id="Zyy-2q-XHm"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="imgView" destination="2Lw-tN-NIv" id="98s-sl-nFO"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ayd-Vs-QXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2305.7971014492755" y="1.6304347826086958"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -238,7 +212,6 @@
                         <segue destination="T4P-ee-KZH" kind="relationship" relationship="viewControllers" id="zDv-D1-30b"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="47M-j7-gRL" kind="relationship" relationship="viewControllers" id="N9V-mD-2dA"/>
-                        <segue destination="yAb-J9-ycK" kind="relationship" relationship="viewControllers" id="MFa-1K-yVj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>

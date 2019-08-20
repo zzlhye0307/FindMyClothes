@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import SDWebImage
+import SDWebImageWebPCoder
 
 var searchItemsId = [101, 102, 103, 104, 105, 106, 107, 108, 109, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017]
 var searchItemsTitle = ["[이즈] 린넨 밴딩 팬츠 [베이지]", "[시티브리즈] 브리즈 슬림 원피스 블랙", "[로맨틱크라운] Stripe Cardigan_Yellow", "[카인드라운지] 글로우 새틴 미디 스커트_카키", "[로맨틱크라운] GNAC Skirt Short_Purple", "[오드원아웃] 하트 참 원피스_블랙", "[바이바이섭] V-NECK PUFF SHIRTS BLUE", "[어낫띵] DROP_SHOULDER SANTA SWEAT_SHIRT", "[스컬프터] [SSS]글리터 니트 크롭 티[멀티 피치]", "[오드원아웃] 플라워 스퀘어 넥_핑크"]
@@ -32,6 +33,7 @@ var testTitle: [String] = []
 var testPrice: [String] = []
 var testImgLink: [String] = []
 var testLink: [String] = []
+var test: [Products] = []
 var isFinished: Bool = false
 
 class SearchResultViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
@@ -52,18 +54,8 @@ class SearchResultViewController: UIViewController, UICollectionViewDelegate, UI
         searchResultView.addGestureRecognizer(longPress)
     }
     
-    func getMatchedData() {
-        categoryResult = categoryResult.lowercased()
-        patternResult = patternResult.lowercased()
-        let product = Products()
-        product?.scanItems(category: categoryResult, pattern: patternResult, fabric: fabricResult)
-    }
-
-    
     /* return the number of collection cells */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        getMatchedData()
-//        return searchItemsTitle.count
         print("at searchView \(testId.count)")
         return testId.count
     }
@@ -72,6 +64,9 @@ class SearchResultViewController: UIViewController, UICollectionViewDelegate, UI
         let cell = searchResultView.dequeueReusableCell(withReuseIdentifier: "resultCell", for: indexPath) as! CollectionViewCell
         let cellIndex = (indexPath as NSIndexPath).row
         
+        let WebPCoder = SDImageWebPCoder.shared
+        SDImageCodersManager.shared.addCoder(WebPCoder)
+
         cell.cellTitleLabel.text = testTitle[cellIndex]
         cell.cellImageView!.sd_setImage(with: URL(string: testImgLink[cellIndex]))
         cell.cellPriceLabel.text = testPrice[cellIndex]
@@ -120,7 +115,7 @@ class SearchResultViewController: UIViewController, UICollectionViewDelegate, UI
         print("Favorite에 등록되었습니다")
     }
     
-    func insertItemToFavorite(id: Int32, title: String, price: String, link: String, img: NSData) {
+    func insertItemToFavorite(id: Int32, title: String, price: String, link: String, imgLink: String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
@@ -131,7 +126,7 @@ class SearchResultViewController: UIViewController, UICollectionViewDelegate, UI
         favoriteItem.setValue(title, forKey: "title")
         favoriteItem.setValue(price, forKey: "price")
         favoriteItem.setValue(link, forKey: "link")
-        favoriteItem.setValue(img, forKey: "img")
+        favoriteItem.setValue(imgLink, forKey: "imgLink")
         
         do {
             managedContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
@@ -174,13 +169,19 @@ extension SearchResultViewController: UIGestureRecognizerDelegate {
         }
         else if (longPressGesture.state == UIGestureRecognizer.State.began) {
             let cellIndex = (indexPath! as NSIndexPath).row
-
+            /*
             let id = Int32(searchItemsId[cellIndex])
             let title = searchItemsTitle[cellIndex]
             let price = searchItemsPrice[cellIndex]
             let link = searchItemsLink[cellIndex]
             let img = UIImage(named: searchItemsImageFile[cellIndex])?.pngData() as! NSData
-            
+            */
+            let id = Int32(testId[cellIndex])
+            let title = testTitle[cellIndex]
+            let price = testPrice[cellIndex]
+            let link = testLink[cellIndex]
+            let imgLink = testImgLink[cellIndex]
+
             if isItemAlreadyExisted(id: id) {
                 let failAlert = UIAlertController(title: "LIKE", message: "이미 Favorite에 등록되어있는 상품입니다.", preferredStyle: UIAlertController.Style.alert)
                 let okAction = UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil)
@@ -193,7 +194,7 @@ extension SearchResultViewController: UIGestureRecognizerDelegate {
                 likeAlert.addAction(okAction)
                 present(likeAlert, animated: true, completion: nil)
             
-                insertItemToFavorite(id: id, title: title, price: price, link: link, img: img)
+                insertItemToFavorite(id: id, title: title, price: price, link: link, imgLink: imgLink)
             }
         }
     }

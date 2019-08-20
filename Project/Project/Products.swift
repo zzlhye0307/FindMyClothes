@@ -120,27 +120,7 @@ class Products: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             if error != nil {
                 print("The request is failed. Error: \(String(describing: error))")
             }
-            /*
-            var page = 1
-            while (true) {
-                print("<Page : \(page)>")
-                if output != nil {
-                    print("******SCAN RESULT*******")
-                    for clothes in output!.items {
-                        let clothesItem = clothes as! Products
-                        print("\(count) | [\(clothesItem._id!)]")
-                        print("\(clothesItem._title!)")
-                        print("\(clothesItem._desc!)")
-                        count += 1
-                    }
-                }
-                else {
-                    break
-                }
-                output?.loadNextPage()
-                page += 1
-            }
-            */
+            
             if output != nil {
                 testId.removeAll()
                 testTitle.removeAll()
@@ -155,6 +135,9 @@ class Products: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
                     print("\(clothesItem._desc!)")
                     testId.append(clothesItem._id as! Int)
                     testTitle.append(clothesItem._title!)
+                    if (!self.isAvailableAddress(clothesItem.img!)) {
+                        clothesItem.img = "https:" + clothesItem.img!
+                    }
                     testImgLink.append(clothesItem.img!)
                     testLink.append(clothesItem.link!)
                     testPrice.append(clothesItem.price!)
@@ -172,4 +155,17 @@ class Products: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             print("after Scan \(testId.count)")
         }
     }
+    
+    func isAvailableAddress(_ link: String) -> Bool {
+        if (link.hasPrefix("http:")) {
+            return true
+        }
+        else if (link.hasPrefix("https://")) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
 }

@@ -21,3 +21,5 @@ ${BUILT_PRODUCTS_DIR}/AWSSNS/AWSSNS.framework
 ${BUILT_PRODUCTS_DIR}/AWSSQS/AWSSQS.framework
 ${BUILT_PRODUCTS_DIR}/AWSSimpleDB/AWSSimpleDB.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/SDWebImageWebPCoder/SDWebImageWebPCoder.framework
+${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework

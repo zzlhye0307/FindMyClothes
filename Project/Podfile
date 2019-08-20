@@ -23,8 +23,8 @@ target 'Project' do
   pod 'AWSSimpleDB'
   pod 'AWSSNS'
   pod 'AWSSQS'
-  pod 'SDWebImage', '~> 5.0'  
+  pod 'SDWebImage', '~> 5.0'
+  pod 'SDWebImageWebPCoder'
   # other pods
   # Pods for Project
-
 end

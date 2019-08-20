@@ -203,11 +203,7 @@ class ViewController: UIViewController {
         
             do{
                 try handler.perform([self.categoryClassificationRequest, self.patternClassificationRequest, self.fabricClassificationRequest])
-//            try handler.perform([self.patternClassificationRequest])
- //           try handler.perform([self.fabricClassificationRequest])
             }catch {
-//                let message = "category : " + category +
-//                    "\npattern : " + pattern + "\nfabric : " + fabric + "이 결과가 맞습니까?"
                 let message = "Hello"
                 let failAlarm = UIAlertController(title: "확인", message: message, preferredStyle: UIAlertController.Style.alert)
                 let okAction = UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil)
@@ -283,14 +279,23 @@ class ViewController: UIViewController {
             let okAction = UIAlertAction(title: "네", style: UIAlertAction.Style.default, handler: {
                 ACTION in
                 self.isMoved = true
+                if (self.category == "Skirts") {
+                    self.category = "skirt"
+                }
+                else if (self.category == "Outers") {
+                    self.category = "outer"
+                }
+                else if (self.category == "Tops") {
+                    self.category = "top"
+                }
                 let resultView = self.storyboard?.instantiateViewController(withIdentifier: "searchResultView") as! SearchResultViewController
                 resultView.modalTransitionStyle = UIModalTransitionStyle.coverVertical
                 isFinished = false
                 let item = Products()
                 item?.scanItems(category: self.category!.lowercased(), pattern: self.pattern!.lowercased(), fabric: self.fabric!)
                 while (!isFinished) {
-                    print("while: \(isFinished)")
-                    Thread.sleep(forTimeInterval: 0.1)
+//                    print("while: \(isFinished)")
+                    Thread.sleep(forTimeInterval: 0.3)
                 }
                 print("#3 : \(testId.count)")
 

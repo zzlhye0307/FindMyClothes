@@ -40,9 +40,21 @@ PODS:
     - AWSCore (= 2.6.35)
   - AWSSQS (2.6.35):
     - AWSCore (= 2.6.35)
+  - libwebp (1.0.3):
+    - libwebp/demux (= 1.0.3)
+    - libwebp/mux (= 1.0.3)
+    - libwebp/webp (= 1.0.3)
+  - libwebp/demux (1.0.3):
+    - libwebp/webp
+  - libwebp/mux (1.0.3):
+    - libwebp/demux
+  - libwebp/webp (1.0.3)
   - SDWebImage (5.1.0):
     - SDWebImage/Core (= 5.1.0)
   - SDWebImage/Core (5.1.0)
+  - SDWebImageWebPCoder (0.2.3):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.0)
 
 DEPENDENCIES:
   - AWSAutoScaling
@@ -64,6 +76,7 @@ DEPENDENCIES:
   - AWSSNS
   - AWSSQS
   - SDWebImage (~> 5.0)
+  - SDWebImageWebPCoder
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -88,7 +101,9 @@ SPEC REPOS:
     - AWSSimpleDB
     - AWSSNS
     - AWSSQS
+    - libwebp
     - SDWebImage
+    - SDWebImageWebPCoder
 
 SPEC CHECKSUMS:
   AWSAuthCore: 386e045a341acebf2409425467e907ae1a45ed63
@@ -112,8 +127,10 @@ SPEC CHECKSUMS:
   AWSSimpleDB: cb495b9a8ec2b9d5227b19b58ed67b18f2392b9b
   AWSSNS: 61e5fa0ba7b7ade784af68400acb6c66c990a996
   AWSSQS: 149383dbe40c8eddf5a8d08cc93b2b401fc6307e
+  libwebp: 057912d6d0abfb6357d8bb05c0ea470301f5d61e
   SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
+  SDWebImageWebPCoder: 7568737603c50f6237850afedd7e9e28e5917e6b
 
-PODFILE CHECKSUM: 88d06699bb54d4cf5549d1c689472b7884f72e63
+PODFILE CHECKSUM: 38327ef16e4ab207bd522e12dd1d0157faa7362b
 
 COCOAPODS: 1.7.5

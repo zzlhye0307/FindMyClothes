@@ -25,7 +25,6 @@
 		0406191522FA991200E48135 /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406191422FA991200E48135 /* RecentViewController.swift */; };
 		0406191722FA9F5300E48135 /* RecentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406191622FA9F5300E48135 /* RecentViewCell.swift */; };
 		0406191923010C8400E48135 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0406191823010C8400E48135 /* awsconfiguration.json */; };
-		0406191D2301346300E48135 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406191C2301346300E48135 /* ViewController2.swift */; };
 		04061923230263D800E48135 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04061922230263D800E48135 /* Products.swift */; };
 		040789E822F5821B009FF86D /* sImg in Resources */ = {isa = PBXBuildFile; fileRef = 040789E722F5821B009FF86D /* sImg */; };
 		0CC3352045047F8DFB729A52 /* Pods_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E027BB1958859BC432048924 /* Pods_Project.framework */; };
@@ -52,7 +51,6 @@
 		0406191422FA991200E48135 /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
 		0406191622FA9F5300E48135 /* RecentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewCell.swift; sourceTree = "<group>"; };
 		0406191823010C8400E48135 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
-		0406191C2301346300E48135 /* ViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		04061922230263D800E48135 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		040789E722F5821B009FF86D /* sImg */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sImg; sourceTree = "<group>"; };
 		09AF39CEB36197B7072E381A /* Pods-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.release.xcconfig"; path = "Target Support Files/Pods-Project/Pods-Project.release.xcconfig"; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 				0403F88D22EFE56800184A3B /* FavoriteViewController.swift */,
 				0403F8DF22F2887500184A3B /* TableViewCell.swift */,
 				0403F8A922F07A5B00184A3B /* ViewController.swift */,
-				0406191C2301346300E48135 /* ViewController2.swift */,
 				04061922230263D800E48135 /* Products.swift */,
 				0406191422FA991200E48135 /* RecentViewController.swift */,
 				0406191622FA9F5300E48135 /* RecentViewCell.swift */,
@@ -261,7 +258,6 @@
 				0403F8E022F2887500184A3B /* TableViewCell.swift in Sources */,
 				0403F8A022EFF52100184A3B /* CGImagePropertyOrientation.swift in Sources */,
 				0406191522FA991200E48135 /* RecentViewController.swift in Sources */,
-				0406191D2301346300E48135 /* ViewController2.swift in Sources */,
 				0403F8A622EFF56800184A3B /* FabricClassifier.mlmodel in Sources */,
 				0403F88A22EFE56800184A3B /* AppDelegate.swift in Sources */,
 				0403F8E322F2986C00184A3B /* Model.xcdatamodeld in Sources */,
