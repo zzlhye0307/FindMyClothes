@@ -87,8 +87,8 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let item = Products()
         item?.scanItems(category: category, pattern: pattern, fabric: fabric)
         while (!isFinished) {
-            print("while: \(isFinished)")
-            Thread.sleep(forTimeInterval: 0.1)
+//            print("while: \(isFinished)")
+            Thread.sleep(forTimeInterval: 0.3)
         }
         print("#3 : \(testId.count)")
         present(resultView, animated: true, completion: nil)
