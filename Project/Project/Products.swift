@@ -48,58 +48,7 @@ class Products: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             "_desc" : "desc"
         ]
     }
-    
-    func readItems() {
-        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
-        
-//        let items: Products = Products()
-        
-        dynamoDBObjectMapper.load(Products.self, hashKey: 1, rangeKey: "피크린넨반팔JK").continueWith{ (task: AWSTask<AnyObject>) -> Any? in
-            print("data loading......")
-            if let error = task.error as? NSError {
-                print("error is occured during loading")
-                print("----------------\n\(error)")
-                return nil
-            }
-            let output = task.result as! Products
-            
-            for info in output._title! {
-                print(info)
-            }
-            return nil
-        }
-    }
-    
-    func queryItems() {
-        let queryExpression = AWSDynamoDBQueryExpression()
-        
-        queryExpression.keyConditionExpression = "#id = :Id"
-        
-        queryExpression.expressionAttributeNames = [
-            "#id": "id"
-        ]
-        
-        queryExpression.expressionAttributeValues = [
-            ":Id" : 1000
-        ]
- 
-        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
-        
-        dynamoDBObjectMapper.query(Products.self, expression: queryExpression) { (output: AWSDynamoDBPaginatedOutput?, error: Error?) in
-            if error != nil {
-                print("The request is failed. Error: \(String(describing: error))")
-            }
-            if output != nil {
-                for clothes in output!.items {
-                    let clothesItem = clothes as! Products
-                    print("\(clothesItem._title!)")
-                    print("\(clothesItem._desc!)")
-                    print("\(clothesItem.img!)")
-                }
-            }
-        }
-    }
-    
+
     func scanItems(category: String, pattern: String, fabric: String) {
         var count = 0
         let scanExpression = AWSDynamoDBScanExpression()
@@ -122,37 +71,23 @@ class Products: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             }
             
             if output != nil {
-                testId.removeAll()
-                testTitle.removeAll()
-                testPrice.removeAll()
-                testImgLink.removeAll()
-                testLink.removeAll()
+                test.removeAll()
                 print("******SCAN RESULT*******")            
                 for clothes in output!.items {
                     let clothesItem = clothes as! Products
-                    print("\(count) | [\(clothesItem._id!)]")
-                    print("\(clothesItem._title!)")
-                    print("\(clothesItem._desc!)")
-                    testId.append(clothesItem._id as! Int)
-                    testTitle.append(clothesItem._title!)
                     if (!self.isAvailableAddress(clothesItem.img!)) {
                         clothesItem.img = "https:" + clothesItem.img!
                     }
-                    testImgLink.append(clothesItem.img!)
-                    testLink.append(clothesItem.link!)
-                    testPrice.append(clothesItem.price!)
+                    test.append(clothesItem)
                     count += 1
                 }
             }
+            self.sortArrayByPriority()
             print("total: \(count)")
-            print("************************")
-            print("Check")
-            for i in 0 ..< testId.count {
-                print("[\(i)] : \(testId[i]) and \(testTitle[i])")
-                print(testImgLink[i])
-            }
+//            print("************************")
+//            print("Check")
             isFinished = true
-            print("after Scan \(testId.count)")
+//            print("after Scan \(test.count)")
         }
     }
     
@@ -167,5 +102,16 @@ class Products: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             return false
         }
     }
-
+    
+    func sortArrayByPriority() {
+        test = test.sorted(by: {
+            if $0.sum != $1.sum {
+                return Int(truncating: $0.sum!) > Int(truncating: $1.sum!)
+            }
+            else {
+                return Float(truncating: $0.variance!) < Float(truncating: $1.variance!)
+            }
+        })
+    }
+    
 }

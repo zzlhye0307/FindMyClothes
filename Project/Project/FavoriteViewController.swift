@@ -44,6 +44,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         } catch let error as NSError {
             print("error : \(error)")
         }
+        storedFavoriteItems.reverse()
     }
     
     func showData() {
@@ -59,45 +60,14 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
             let price = myItem.price
             let link = myItem.link
             let imgLink = myItem.imgLink
-//            let img = myItem.img
+            
             print("id: \(id)")
             print("title: \(title!)")
             print("price: \(price!)")
             print("link: \(link!)")
-            print("image link: \(imgLink)")
-//            print("img: \(img!)")
+            print("image link: \(imgLink!)")
         }
      }
-    
-    func insertData() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedObject = appDelegate.persistentContainer.viewContext
-        
-        let favoriteEntity = NSEntityDescription.entity(forEntityName: "Favorite", in: managedObject)!
-        /*
-        for i in 0 ..< 7 {
-            let favorite = NSManagedObject(entity: favoriteEntity, insertInto: managedObject)
-            let newImg = UIImage(named: itemsImageFile[i])?.jpegData(compressionQuality: 1.0)
-            favorite.setValue((i+1), forKey: "id")
-            favorite.setValue(itemsTitle[i], forKey: "title")
-            favorite.setValue(itemsPrice[i], forKey: "price")
-            favorite.setValue(itemsLink[i], forKey: "link")
-            favorite.setValue(newImg, forKey: "img")
-            managedObject.insert(favorite)
-        }
-        */
-        do {
-            managedObject.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-            try managedObject.save()
-        } catch let error as NSError {
-            print("error: \(error)")
-        }
-        
-        print("Insert task is finished")
-    }
     
     func deleteData(index: Int) {
         print("count: \(storedFavoriteItems.count)")
@@ -156,7 +126,6 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         
         let favorite = storedFavoriteItems[rowIndex] as! Favorite
         
-//        cell.cellImgView.image = UIImage(data: favorite.img!)
         cell.cellImgView.sd_setImage(with: URL(string: favorite.imgLink!))
         cell.cellTitleLabel.text = favorite.title
         cell.cellPriceLabel.text = favorite.price!

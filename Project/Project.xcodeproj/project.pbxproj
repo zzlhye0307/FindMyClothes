@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040212D2230D03A3009FC9EF /* CategoryClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 040212D1230D03A3009FC9EF /* CategoryClassifier.mlmodel */; };
+		040212D4230D03AB009FC9EF /* PatternClassifier3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 040212D3230D03AB009FC9EF /* PatternClassifier3.mlmodel */; };
 		0403F88A22EFE56800184A3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403F88922EFE56800184A3B /* AppDelegate.swift */; };
 		0403F88C22EFE56800184A3B /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403F88B22EFE56800184A3B /* SearchResultViewController.swift */; };
 		0403F88E22EFE56800184A3B /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403F88D22EFE56800184A3B /* FavoriteViewController.swift */; };
@@ -14,23 +16,21 @@
 		0403F89322EFE56A00184A3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0403F89222EFE56A00184A3B /* Assets.xcassets */; };
 		0403F89622EFE56A00184A3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0403F89422EFE56A00184A3B /* LaunchScreen.storyboard */; };
 		0403F8A022EFF52100184A3B /* CGImagePropertyOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403F89F22EFF52100184A3B /* CGImagePropertyOrientation.swift */; };
-		0403F8A422EFF56800184A3B /* CategoryClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0403F8A122EFF56800184A3B /* CategoryClassifier.mlmodel */; };
-		0403F8A522EFF56800184A3B /* PatternClassifier3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0403F8A222EFF56800184A3B /* PatternClassifier3.mlmodel */; };
 		0403F8A622EFF56800184A3B /* FabricClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0403F8A322EFF56800184A3B /* FabricClassifier.mlmodel */; };
 		0403F8AA22F07A5B00184A3B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403F8A922F07A5B00184A3B /* ViewController.swift */; };
 		0403F8E022F2887500184A3B /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403F8DF22F2887500184A3B /* TableViewCell.swift */; };
 		0403F8E322F2986C00184A3B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0403F8E122F2986C00184A3B /* Model.xcdatamodeld */; };
-		0403F92122F2C50A00184A3B /* img in Resources */ = {isa = PBXBuildFile; fileRef = 0403F92022F2C50A00184A3B /* img */; };
 		0403F92322F316A300184A3B /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403F92222F316A300184A3B /* CollectionViewCell.swift */; };
 		0406191522FA991200E48135 /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406191422FA991200E48135 /* RecentViewController.swift */; };
 		0406191722FA9F5300E48135 /* RecentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406191622FA9F5300E48135 /* RecentViewCell.swift */; };
 		0406191923010C8400E48135 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0406191823010C8400E48135 /* awsconfiguration.json */; };
 		04061923230263D800E48135 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04061922230263D800E48135 /* Products.swift */; };
-		040789E822F5821B009FF86D /* sImg in Resources */ = {isa = PBXBuildFile; fileRef = 040789E722F5821B009FF86D /* sImg */; };
 		0CC3352045047F8DFB729A52 /* Pods_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E027BB1958859BC432048924 /* Pods_Project.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040212D1230D03A3009FC9EF /* CategoryClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CategoryClassifier.mlmodel; sourceTree = "<group>"; };
+		040212D3230D03AB009FC9EF /* PatternClassifier3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PatternClassifier3.mlmodel; sourceTree = "<group>"; };
 		0403F88622EFE56800184A3B /* Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0403F88922EFE56800184A3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0403F88B22EFE56800184A3B /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
@@ -40,19 +40,15 @@
 		0403F89522EFE56A00184A3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0403F89722EFE56A00184A3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0403F89F22EFF52100184A3B /* CGImagePropertyOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImagePropertyOrientation.swift; sourceTree = "<group>"; };
-		0403F8A122EFF56800184A3B /* CategoryClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CategoryClassifier.mlmodel; sourceTree = "<group>"; };
-		0403F8A222EFF56800184A3B /* PatternClassifier3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PatternClassifier3.mlmodel; sourceTree = "<group>"; };
 		0403F8A322EFF56800184A3B /* FabricClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = FabricClassifier.mlmodel; sourceTree = "<group>"; };
 		0403F8A922F07A5B00184A3B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0403F8DF22F2887500184A3B /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		0403F8E222F2986C00184A3B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		0403F92022F2C50A00184A3B /* img */ = {isa = PBXFileReference; lastKnownFileType = folder; path = img; sourceTree = "<group>"; };
 		0403F92222F316A300184A3B /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		0406191422FA991200E48135 /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
 		0406191622FA9F5300E48135 /* RecentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewCell.swift; sourceTree = "<group>"; };
 		0406191823010C8400E48135 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		04061922230263D800E48135 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
-		040789E722F5821B009FF86D /* sImg */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sImg; sourceTree = "<group>"; };
 		09AF39CEB36197B7072E381A /* Pods-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.release.xcconfig"; path = "Target Support Files/Pods-Project/Pods-Project.release.xcconfig"; sourceTree = "<group>"; };
 		E027BB1958859BC432048924 /* Pods_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1616172EA5CE5899A1C66FC /* Pods-Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.debug.xcconfig"; path = "Target Support Files/Pods-Project/Pods-Project.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,9 +69,9 @@
 		0403F87D22EFE56800184A3B = {
 			isa = PBXGroup;
 			children = (
-				0403F8A122EFF56800184A3B /* CategoryClassifier.mlmodel */,
+				040212D1230D03A3009FC9EF /* CategoryClassifier.mlmodel */,
 				0403F8A322EFF56800184A3B /* FabricClassifier.mlmodel */,
-				0403F8A222EFF56800184A3B /* PatternClassifier3.mlmodel */,
+				040212D3230D03AB009FC9EF /* PatternClassifier3.mlmodel */,
 				0403F88822EFE56800184A3B /* Project */,
 				0403F88722EFE56800184A3B /* Products */,
 				853A08FB24F2E0ED3F37B3C4 /* Pods */,
@@ -94,8 +90,6 @@
 		0403F88822EFE56800184A3B /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				040789E722F5821B009FF86D /* sImg */,
-				0403F92022F2C50A00184A3B /* img */,
 				0403F88922EFE56800184A3B /* AppDelegate.swift */,
 				0403F88B22EFE56800184A3B /* SearchResultViewController.swift */,
 				0403F92222F316A300184A3B /* CollectionViewCell.swift */,
@@ -193,8 +187,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0403F92122F2C50A00184A3B /* img in Resources */,
-				040789E822F5821B009FF86D /* sImg in Resources */,
 				0406191923010C8400E48135 /* awsconfiguration.json in Resources */,
 				0403F89622EFE56A00184A3B /* LaunchScreen.storyboard in Resources */,
 				0403F89322EFE56A00184A3B /* Assets.xcassets in Resources */,
@@ -253,17 +245,17 @@
 			files = (
 				0403F88E22EFE56800184A3B /* FavoriteViewController.swift in Sources */,
 				0406191722FA9F5300E48135 /* RecentViewCell.swift in Sources */,
-				0403F8A522EFF56800184A3B /* PatternClassifier3.mlmodel in Sources */,
-				0403F8A422EFF56800184A3B /* CategoryClassifier.mlmodel in Sources */,
 				0403F8E022F2887500184A3B /* TableViewCell.swift in Sources */,
 				0403F8A022EFF52100184A3B /* CGImagePropertyOrientation.swift in Sources */,
 				0406191522FA991200E48135 /* RecentViewController.swift in Sources */,
 				0403F8A622EFF56800184A3B /* FabricClassifier.mlmodel in Sources */,
 				0403F88A22EFE56800184A3B /* AppDelegate.swift in Sources */,
 				0403F8E322F2986C00184A3B /* Model.xcdatamodeld in Sources */,
+				040212D4230D03AB009FC9EF /* PatternClassifier3.mlmodel in Sources */,
 				0403F8AA22F07A5B00184A3B /* ViewController.swift in Sources */,
 				04061923230263D800E48135 /* Products.swift in Sources */,
 				0403F88C22EFE56800184A3B /* SearchResultViewController.swift in Sources */,
+				040212D2230D03A3009FC9EF /* CategoryClassifier.mlmodel in Sources */,
 				0403F92322F316A300184A3B /* CollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

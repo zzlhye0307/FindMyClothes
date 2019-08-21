@@ -165,26 +165,26 @@ class ViewController: UIViewController {
         picker.delegate = self
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-  }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
   
-  @IBAction func takePicture() {
-    presentPhotoPicker(sourceType: .camera)
-    returnSgIndexToOriginalState()
-  }
+    @IBAction func takePicture() {
+        presentPhotoPicker(sourceType: .camera)
+        returnSgIndexToOriginalState()
+    }
 
-  @IBAction func choosePhoto() {
-    presentPhotoPicker(sourceType: .photoLibrary)
-    returnSgIndexToOriginalState()
-  }
+    @IBAction func choosePhoto() {
+        presentPhotoPicker(sourceType: .photoLibrary)
+        returnSgIndexToOriginalState()
+    }
 
-  func presentPhotoPicker(sourceType: UIImagePickerController.SourceType) {
-    let picker = UIImagePickerController()
-    picker.delegate = self
-    picker.sourceType = sourceType
-    present(picker, animated: true)
-  }
+    func presentPhotoPicker(sourceType: UIImagePickerController.SourceType) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = sourceType
+        present(picker, animated: true)
+    }
     
     func returnSgIndexToOriginalState() {
         categoryRenewSgButton.selectedSegmentIndex = 0
@@ -279,26 +279,17 @@ class ViewController: UIViewController {
             let okAction = UIAlertAction(title: "네", style: UIAlertAction.Style.default, handler: {
                 ACTION in
                 self.isMoved = true
-                if (self.category == "Skirts") {
-                    self.category = "skirt"
-                }
-                else if (self.category == "Outers") {
-                    self.category = "outer"
-                }
-                else if (self.category == "Tops") {
-                    self.category = "top"
-                }
+                
                 let resultView = self.storyboard?.instantiateViewController(withIdentifier: "searchResultView") as! SearchResultViewController
                 resultView.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+
                 isFinished = false
                 let item = Products()
-                item?.scanItems(category: self.category!.lowercased(), pattern: self.pattern!.lowercased(), fabric: self.fabric!)
+                item?.scanItems(category: self.category!, pattern: self.pattern!, fabric: self.fabric!)
+                
                 while (!isFinished) {
-//                    print("while: \(isFinished)")
                     Thread.sleep(forTimeInterval: 0.3)
                 }
-                print("#3 : \(testId.count)")
-
                 self.present(resultView, animated: true, completion: nil)
                 self.changeBtnState(self.searchMode)
                 self.insertLog()
@@ -314,16 +305,16 @@ class ViewController: UIViewController {
             self.present(confirmAlarm, animated: true, completion: nil)
         }
     }
-
+    
     func insertLog() {
         var imgData: NSData?
         let date: Date = Date()
         
         if selectedImgType == "JPG" {
-            imgData = selectedImg?.jpegData(compressionQuality: 1.0) as! NSData
+            imgData = selectedImg?.jpegData(compressionQuality: 1.0)! as NSData?
         }
         else if selectedImgType == "PNG" {
-            imgData = selectedImg?.pngData() as! NSData
+            imgData = selectedImg?.pngData()! as NSData?
         }
         else {
             print("Can't recognize the type of image. Sorry")
