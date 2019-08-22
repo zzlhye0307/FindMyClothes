@@ -316,6 +316,9 @@ class ViewController: UIViewController {
         else if selectedImgType == "PNG" {
             imgData = selectedImg?.pngData()! as NSData?
         }
+        else if selectedImgType == "Apple" {
+            imgData = selectedImg?.pngData() as NSData?
+        }
         else {
             print("Can't recognize the type of image. Sorry")
         }
@@ -351,15 +354,20 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as! UIImage
     imageView.image = image
     selectedImg = image
-    let imgURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as! NSURL
-    if (imgURL.absoluteString?.hasSuffix(".jpg"))! || (imgURL.absoluteString?.hasSuffix(".jpeg"))! {
+    if info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] != nil {
+        let imgURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as! NSURL
+        if (imgURL.absoluteString?.hasSuffix(".jpg"))! || (imgURL.absoluteString?.hasSuffix(".jpeg"))! {
         selectedImgType = "JPG"
-    }
-    else if (imgURL.absoluteString?.hasSuffix(".png"))! {
-        selectedImgType = "PNG"
+        }
+        else if (imgURL.absoluteString?.hasSuffix(".png"))! {
+            selectedImgType = "PNG"
+        }
+        else {
+            selectedImgType = "Unknown"
+        }
     }
     else {
-        selectedImgType = "UNKNOWN"
+        selectedImgType = "Apple"
     }
     
     classify(image: image)
