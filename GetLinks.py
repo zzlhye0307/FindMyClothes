@@ -45,7 +45,7 @@ def getGoodsInfo_1(fDirectory, numOfGoods):
                 except:
                     description = "Null"
 
-                w_desc = link, image, title, price, description
+                w_desc = link, image, title, price, description, "육육걸즈"
                 print(title)
 
                 with open(fDirectory, "a", encoding="utf-8") as f:
@@ -97,7 +97,7 @@ def getGoodsInfo_2(fDirectory, numOfGoods):
 
                 description = span3.text
 
-                w_desc = link, image, title, price, description
+                w_desc = link, image, title, price, description, "핫핑"
                 print(title)
                 with open(fDirectory, "a", encoding="utf-8") as f:
                     f.write(str(w_desc))
@@ -155,7 +155,7 @@ def getGoodsInfo_3(fDirectory, numOfGoods):
                 except:
                     description = ""
 
-            w_desc = link, image, title, price, description
+            w_desc = link, image, title, price, description, "슬로우앤드"
             with open(fDirectory, "a", encoding="utf-8") as f:
                 f.write(str(w_desc))
                 f.write("\n")
@@ -200,7 +200,7 @@ def getGoodsInfo_4(fDirectory, numOfGoods):
                             count) + "]/div[2]/ul/li[3]/span")
                     description = span3.text
 
-            w_desc = link, image, title, price, description
+            w_desc = link, image, title, price, description, "리리앤코"
             with open(fDirectory, "a", encoding="utf-8") as f:
                 f.write(str(w_desc))
                 f.write("\n")
@@ -241,7 +241,7 @@ def getGoodsInfo_5(fDirectory, numOfGoods):
                         count) + "]/div[2]/ul/li[3]")
                 description = span3.text
 
-                w_desc = link, image, title, price, description
+                w_desc = link, image, title, price, description, "로렌하이"
 
                 with open(fDirectory, "a", encoding="utf-8") as f:
                     f.write(str(w_desc))
@@ -257,7 +257,7 @@ def getGoodsInfo_5(fDirectory, numOfGoods):
             time.sleep(0.001)
             
 def getGoodsLinks(shopName):
-    fName = "ProductsInfo"
+    fName = "New_ProductsInfo"
     fDirectory = "/Users/cs402a/Desktop/PythonFile/" + fName
     
     if shopName == "육육걸즈":
