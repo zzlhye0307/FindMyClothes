@@ -11,7 +11,7 @@ table = dynamodb.create_table(
 		},
 		{
 			'AttributeName': 'title',
-			'KeyType': 'HASH'
+			'KeyType': 'RANGE'
 		}
 	],
 	AttributeDefinitions = [
