@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 
-with open("/Users/cs402a/Desktop/PythonFile/MatchedProducts", "rt") as f:
+with open("/Users/cs402a/Desktop/PythonFile/New_ProductsInfo", "rt") as f:
     products = f.readlines()
 
 score_category = list()
@@ -20,7 +20,7 @@ dress_elements = ["원피스", "OPS", "ops" "드레스", "dress", "롱OPS", "니
 skirt_elements = ["스커트", "치마", "SK", "skirt", "sk", "롱sk", "롱SK", "롱스커트", "니트스커트", "니트sk", "니트SK", "니트롱스커트",
                   "니트 롱스커트", "롱-스커트", "미니-스커트", "데님-스커트", "치마바지", "스커트팬츠"]
 pants_elements = ["팬츠", "슬랙스", "숏츠", "SL", "sl", "바지", "쇼츠","PT", "pt", "니트팬츠", "jean", "JEAN", "블랙진", "일자P",
-                  "일자진", "일자팬츠", "조거팬츠", "부츠P", "스키니"]
+                  "일자진", "일자팬츠", "조거팬츠", "부츠P", "스키니", "데님P", "일자핏P"]
 
 cotton_elements = ["폴리", "코튼", "cotton", "린넨", "T", "BL", "bl", "BLOUSE", "blouse", "블라우스", "반팔T", "긴팔T", "박스T",
                    "슬리브", "슬랙스", "맨투맨","mtm", "MTM", "맨투T", '후드T', "후드티", "헨리넥", "셔츠", "남방", "nb", "NB",
@@ -54,12 +54,8 @@ for i in range(len(products)):
         score_pattern[i].append(0)
 
 for i in range(len(products)):
-    link = products[i].split("\'")[1]
-    img = products[i].split("\'")[3]
     title = products[i].split("\'")[5]
-    price = products[i].split("\'")[7]
     desc = products[i].split("\'")[9]
-
 
     for j in range(len(top_elements)):
         if top_elements[j] in title:
@@ -198,7 +194,7 @@ for i in range(len(products)):
     avg = float(sum)/3
     var = pow(score_category[i][max1] - avg, 2) + pow(score_fabric[i][max2] - avg, 2) + pow(score_pattern[i][max3] - avg, 2)
 
-    fDirectory = "/Users/cs402a/Desktop/PythonFile/MatchedProducts"
+    fDirectory = "/Users/cs402a/Desktop/PythonFile/New_MatchedProducts"
     w_desc = category, fabric, pattern, str(sum), str(int(var))
     print(str(w_desc))
 
