@@ -20,6 +20,7 @@ with table.batch_writer() as batch:
                 'title': products[i].split("\'")[5],
                 'price': products[i].split("\'")[7],
                 'desc': products[i].split("\'")[9],
+		'shopname': products[i].split("\'")[11],
                 'category': labels[i].split("\'")[1],
                 'fabric': labels[i].split("\'")[3],
                 'pattern': labels[i].split("\'")[5],
