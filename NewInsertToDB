@@ -10,8 +10,6 @@ display.start()
 
 path = '/home/ubuntu/chromedriver' 
 driver = webdriver.Chrome(path)
-now = datetime.datetime.now()
-fDirectory = "C:\\Users\\zzlhy\\Desktop\\project\\" + now.strftime('%Y-%m-%d')
 products = list()
 labels = list()
 
@@ -31,7 +29,7 @@ dress_elements = ["원피스", "OPS", "ops" "드레스", "dress", "롱OPS", "니
 skirt_elements = ["스커트", "치마", "SK", "skirt", "sk", "롱sk", "롱SK", "롱스커트", "니트스커트", "니트sk", "니트SK", "니트롱스커트",
                   "니트 롱스커트", "롱-스커트", "미니-스커트", "데님-스커트", "치마바지", "스커트팬츠"]
 pants_elements = ["팬츠", "슬랙스", "숏츠", "SL", "sl", "바지", "쇼츠","PT", "pt", "니트팬츠", "jean", "JEAN", "블랙진", "일자P",
-                  "일자진", "일자팬츠", "조거팬츠", "부츠P", "스키니"]
+                  "일자진", "일자팬츠", "조거팬츠", "부츠P", "스키니", "데님P", "일자핏P"]
 
 cotton_elements = ["폴리", "코튼", "cotton", "린넨", "T", "BL", "bl", "BLOUSE", "blouse", "블라우스", "반팔T", "긴팔T", "박스T",
                    "슬리브", "슬랙스", "맨투맨","mtm", "MTM", "맨투T", '후드T', "후드티", "헨리넥", "셔츠", "남방", "nb", "NB",
@@ -60,8 +58,7 @@ def GetNewProducts():
     count = 0
     page = 1
 
-
-    for i in range(1, 2):
+    for i in range(1, numOfGoods):
         try:
             if count < 64:
                 count = count + 1
@@ -87,6 +84,7 @@ def GetNewProducts():
                 products[i-1].append(title)
                 products[i-1].append(price)
                 products[i-1].append(description)
+                products[i-1].append("육육걸즈")
             else:
                 count = 0
                 page = page + 1
@@ -111,10 +109,7 @@ def MatchText():
             score_fabric[i].append(0)
 
     for i in range(len(products)):
-        link = products[i][0]
-        img = products[i][1]
         title = products[i][2]
-        price = products[i][3]
         desc = products[i][4]
 
         for j in range(len(top_elements)):
@@ -266,22 +261,16 @@ def MatchText():
 def NewInsertToDB():
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('Products')
-
-    with open("/home/ubuntu/Desktop/NumOfItems.txt", "rt") as f:
-        numOfItems = f.readline()
         
-    id = int(numOfItems)
-
-    
     with table.batch_writer() as batch:
         for i in range(len(products)):
             batch.put_item(
                 Item={
-                    'id': id,
                     'link': products[i][0],
                     'img': products[i][1],
                     'title': products[i][2],
                     'price': products[i][3],
+                    'shopname' : products[i][5],
                     'category': labels[i][0],
                     'fabric': labels[i][1],
                     'pattern': labels[i][2],
@@ -289,10 +278,6 @@ def NewInsertToDB():
                     'variance': int(labels[i][4])
                 }
             )
-            id += 1
-            
-    with open("/home/ubuntu/Desktop/NumOfItems.txt", "w") as f:
-        f.write(str(id))
 
 GetNewProducts()
 MatchText()
