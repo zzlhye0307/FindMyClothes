@@ -6,14 +6,22 @@ table = dynamodb.create_table(
 	TableName = 'Products',
 	KeySchema = [
 		{
-			'AttributeName': 'id',
+			'AttributeName': 'shopname',
 			'KeyType': 'HASH'
+		},
+		{
+			'AttributeName': 'title',
+			'KeyType': 'RANGE'
 		}
 	],
 	AttributeDefinitions = [
 		{
-			'AttributeName': 'id',
-			'AttributeType': 'N'
+			'AttributeName': 'shopname',
+			'AttributeType': 'S'
+		},
+		{
+			'AttributeName': 'title',
+			'AttributeType': 'S'
 		}
 	],
 	ProvisionedThroughput = {

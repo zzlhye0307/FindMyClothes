@@ -14,12 +14,11 @@ with table.batch_writer() as batch:
     for i in range(0, len(products)):
         batch.put_item(
             Item={
-                'id': i,
                 'link': products[i].split("\'")[1],
                 'img': products[i].split("\'")[3],
                 'title': products[i].split("\'")[5],
                 'price': products[i].split("\'")[7],
-                'desc': products[i].split("\'")[9],
+		'shopname': products[i].split("\'")[11],
                 'category': labels[i].split("\'")[1],
                 'fabric': labels[i].split("\'")[3],
                 'pattern': labels[i].split("\'")[5],
