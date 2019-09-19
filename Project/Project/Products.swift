@@ -13,7 +13,7 @@ import AWSMobileClient
 import AWSAuthCore
 
 class Products: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
-    @objc var _id: NSNumber?
+    @objc var shop: String?
     @objc var _category: String?
     @objc var _pattern: String?
     @objc var _fabric: String?
@@ -30,12 +30,16 @@ class Products: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     }
     
     static func hashKeyAttribute() -> String {
-        return "_id"
+        return "shop"
+    }
+    
+    static func rangeKeyAttribute() -> String {
+        return "_title"
     }
     
     override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any] {
         return [
-            "_id" : "id",
+            "shop" : "shopname",
             "_category" : "category",
             "_pattern" : "pattern",
             "_fabric" : "fabric",
@@ -50,7 +54,7 @@ class Products: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     }
 
     func scanItems(category: String, pattern: String, fabric: String) {
-        var count = 0
+//        var count = 0
         let scanExpression = AWSDynamoDBScanExpression()
         scanExpression.filterExpression = "#category = :Category AND #pattern = :Pattern AND #fabric = :Fabric"
         scanExpression.expressionAttributeNames = [
@@ -72,22 +76,19 @@ class Products: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             
             if output != nil {
                 test.removeAll()
-                print("******SCAN RESULT*******")            
+//                print("******SCAN RESULT*******")
                 for clothes in output!.items {
                     let clothesItem = clothes as! Products
                     if (!self.isAvailableAddress(clothesItem.img!)) {
                         clothesItem.img = "https:" + clothesItem.img!
                     }
                     test.append(clothesItem)
-                    count += 1
+//                    count += 1
                 }
             }
             self.sortArrayByPriority()
-            print("total: \(count)")
-//            print("************************")
-//            print("Check")
+//            print("total: \(count)")
             isFinished = true
-//            print("after Scan \(test.count)")
         }
     }
     

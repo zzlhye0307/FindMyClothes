@@ -55,13 +55,13 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         for i in 0 ..< storedFavoriteItems.count {
             let myItem = storedFavoriteItems[i] as! Favorite
             print("---------------------------------------------------------")
-            let id = myItem.id
+            let shop = myItem.shop
             let title = myItem.title
             let price = myItem.price
             let link = myItem.link
             let imgLink = myItem.imgLink
             
-            print("id: \(id)")
+            print("shop: \(shop!)")
             print("title: \(title!)")
             print("price: \(price!)")
             print("link: \(link!)")

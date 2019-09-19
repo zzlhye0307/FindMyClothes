@@ -137,4 +137,15 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
 
     }
+    @IBAction func deleteAllBtn(_ sender: UIBarButtonItem) {
+        let confirmAlarm = UIAlertController(title: "삭제", message: "전부 삭제하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "네", style: UIAlertAction.Style.default) { (Action) in
+            self.deleteAll()
+            self.viewWillAppear(true)
+        }
+        let noAction = UIAlertAction(title: "아니요", style: UIAlertAction.Style.default, handler: nil)
+        confirmAlarm.addAction(okAction)
+        confirmAlarm.addAction(noAction)
+        present(confirmAlarm, animated: true, completion: nil)
+    }
 }

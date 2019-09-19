@@ -175,6 +175,11 @@
                                                 <action selector="editBtnPressed:" destination="47M-j7-gRL" id="bi5-B5-HvE"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="전부 삭제" id="VLZ-O9-x5l">
+                                            <connections>
+                                                <action selector="deleteAllBtn:" destination="47M-j7-gRL" id="45h-FV-BkL"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -389,7 +394,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_icon2" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BcF-io-mhN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_icon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BcF-io-mhN">
                                 <rect key="frame" x="32" y="80" width="350" height="350"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -403,6 +408,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" 검색 중 입니다. 잠시만 기다려주세요! " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWG-VK-6ud">
+                                <rect key="frame" x="75" y="323" width="273" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ubH-rZ-gTd">
+                                <rect key="frame" x="201" y="393" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -449,12 +464,14 @@
                         <outlet property="fabricRenewSgButton" destination="Oe7-xt-Q9Z" id="8Hj-WD-pRe"/>
                         <outlet property="fabricResultLabel" destination="aVj-A7-OdV" id="Ggb-lJ-1gT"/>
                         <outlet property="imageView" destination="BcF-io-mhN" id="RV3-bp-9aC"/>
+                        <outlet property="myIndicator" destination="ubH-rZ-gTd" id="qyA-NI-rh2"/>
                         <outlet property="patternEtcLabel" destination="0Ry-P3-inC" id="i7Y-Ey-G0a"/>
                         <outlet property="patternRenewSgButton" destination="xy0-5D-Dhw" id="MrD-kX-b1G"/>
                         <outlet property="patternResultLabel" destination="5o7-TX-Y9I" id="p1y-we-Eag"/>
                         <outlet property="photoLibraryButton" destination="Ig6-uc-cHZ" id="Umc-Mw-WMx"/>
                         <outlet property="searchButton" destination="APq-ny-QfH" id="rAY-dO-zwn"/>
                         <outlet property="sgIndexLabel" destination="HrT-Mm-2eJ" id="NPD-Cm-XTe"/>
+                        <outlet property="waitMessageLabel" destination="fWG-VK-6ud" id="fmO-C5-iA1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GUy-nv-kal" sceneMemberID="firstResponder"/>
@@ -554,7 +571,7 @@
     <resources>
         <image name="camera" width="60" height="60"/>
         <image name="heart_on" width="170.66667175292969" height="170.66667175292969"/>
-        <image name="image_icon2" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="image_icon" width="512" height="512"/>
         <image name="picture" width="60" height="60"/>
     </resources>
 </document>

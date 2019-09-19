@@ -93,14 +93,14 @@ class SearchResultViewController: UIViewController, UICollectionViewDelegate, UI
         print("Favorite에 등록되었습니다")
     }
     
-    func insertItemToFavorite(id: Int32, title: String, price: String, link: String, imgLink: String) {
+    func insertItemToFavorite(shop: String, title: String, price: String, link: String, imgLink: String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
         let managedContext = appDelegate.persistentContainer.viewContext
         let favoriteEntity = NSEntityDescription.entity(forEntityName: "Favorite", in: managedContext)!
         let favoriteItem = NSManagedObject(entity: favoriteEntity, insertInto: managedContext)
-        favoriteItem.setValue(id, forKeyPath: "id")
+        favoriteItem.setValue(shop, forKeyPath: "shop")
         favoriteItem.setValue(title, forKey: "title")
         favoriteItem.setValue(price, forKey: "price")
         favoriteItem.setValue(link, forKey: "link")
@@ -116,14 +116,14 @@ class SearchResultViewController: UIViewController, UICollectionViewDelegate, UI
         }
     }
     
-    func isItemAlreadyExisted(id: Int32) -> Bool {
+    func isItemAlreadyExisted(shop: String, title: String) -> Bool {
         var result: Bool = false
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return true
         }
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
-        fetchRequest.predicate = NSPredicate(format: "id = %@", String(id))
+        fetchRequest.predicate = NSPredicate(format: "shop = %@ && title = %@", shop, title)
         
         do {
             let item = try managedContext.fetch(fetchRequest)
@@ -149,13 +149,13 @@ extension SearchResultViewController: UIGestureRecognizerDelegate {
             let cellIndex = (indexPath! as NSIndexPath).row
             let cellItem = test[cellIndex]
             
-            let id = Int32(truncating: cellItem._id!)
+            let shop = cellItem.shop!
             let title = cellItem._title!
             let price = cellItem.price!
             let link = cellItem.link!
             let imgLink = cellItem.img!
             
-            if isItemAlreadyExisted(id: id) {
+            if isItemAlreadyExisted(shop: shop, title: title) {
                 let failAlert = UIAlertController(title: "LIKE", message: "이미 Favorite에 등록되어있는 상품입니다.", preferredStyle: UIAlertController.Style.alert)
                 let okAction = UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil)
                 failAlert.addAction(okAction)
@@ -167,7 +167,7 @@ extension SearchResultViewController: UIGestureRecognizerDelegate {
                 likeAlert.addAction(okAction)
                 present(likeAlert, animated: true, completion: nil)
             
-                insertItemToFavorite(id: id, title: title, price: price, link: link, imgLink: imgLink)
+                insertItemToFavorite(shop: shop, title: title, price: price, link: link, imgLink: imgLink)
             }
         }
     }

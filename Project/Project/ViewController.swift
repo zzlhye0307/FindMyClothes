@@ -24,6 +24,9 @@ class ViewController: UIViewController {
     @IBOutlet var fabricRenewSgButton: UISegmentedControl!
     @IBOutlet var patternRenewSgButton: UISegmentedControl!
     
+    @IBOutlet var waitMessageLabel: UILabel!
+    @IBOutlet var myIndicator: UIActivityIndicatorView!
+    
     let originalMode = true
     let searchMode = false
     var predictedCategory: String?
@@ -35,6 +38,7 @@ class ViewController: UIViewController {
     var selectedImg: UIImage?
     var selectedImgType: String?
     var isMoved = false
+    var isClothes = false
     
     lazy var categoryClassificationRequest: VNCoreMLRequest = {
         do {
@@ -53,20 +57,35 @@ class ViewController: UIViewController {
     }()
     
     func processCategoryObservations(for request: VNRequest, error: Error?){
-        DispatchQueue.main.async {
+        var resultIndex = 1
+        DispatchQueue.main.sync {
             if let results = request.results as? [VNClassificationObservation] {
                 if results.isEmpty {
                     self.categoryResultLabel.text = "nothing found"
-                } else if results[0].confidence < 0.2 {
+                }
+                else if results[0].identifier == "not_clothes" {
+                    //                    self.categoryResultLabel.text = "옷이 아닙니다! 옷 관련 이미지를 넣어주세요"
+                    print("not_clothes")
+                    self.isClothes = false
+                    return
+                }
+                else if results[0].confidence < 0.2 {
                     self.categoryResultLabel.text = "not sure"
-                } else {
+                }
+                else {
+                    self.isClothes = true
                     self.categoryResultLabel.text = String(format: "%@ %.1f%%",
-                                                    results[0].identifier,
-                                                    results[0].confidence * 100)
+                                                           results[0].identifier,
+                                                           results[0].confidence * 100)
                     self.predictedCategory = results[0].identifier
                     self.category = self.predictedCategory
-                    for i in 1 ..< results.count {
-                        self.categoryRenewSgButton.setTitle(results[i].identifier, forSegmentAt: i)
+                    
+                    for i in 1 ..< results.count-1 {
+                        if (results[i].identifier == "not_clothes") {
+                            resultIndex += 1
+                        }
+                        self.categoryRenewSgButton.setTitle(results[resultIndex].identifier, forSegmentAt: i)
+                        resultIndex += 1
                     }
                 }
             } else if  let error = error {
@@ -74,6 +93,7 @@ class ViewController: UIViewController {
             } else {
                 self.categoryResultLabel.text = "???"
             }
+        
         }
     }
 
@@ -172,11 +192,13 @@ class ViewController: UIViewController {
     @IBAction func takePicture() {
         presentPhotoPicker(sourceType: .camera)
         returnSgIndexToOriginalState()
+        searchButton.isEnabled = true
     }
 
     @IBAction func choosePhoto() {
         presentPhotoPicker(sourceType: .photoLibrary)
         returnSgIndexToOriginalState()
+        searchButton.isEnabled = true
     }
 
     func presentPhotoPicker(sourceType: UIImagePickerController.SourceType) {
@@ -200,9 +222,25 @@ class ViewController: UIViewController {
         let orientation = CGImagePropertyOrientation(image.imageOrientation)
         DispatchQueue.global(qos: .userInitiated).async {
             let handler = VNImageRequestHandler(ciImage: ciImage, orientation: orientation)
-        
             do{
-                try handler.perform([self.categoryClassificationRequest, self.patternClassificationRequest, self.fabricClassificationRequest])
+                try handler.perform([self.categoryClassificationRequest])
+                if (self.isClothes) {
+                    do {
+                        try handler.perform([self.patternClassificationRequest, self.fabricClassificationRequest])
+//                        self.searchButton.isEnabled = true
+                    }
+                    catch {
+                        print("error\n")
+                        return
+                    }
+                }
+                else {
+                    let warning = UIAlertController(title: "경고", message: "옷이 아닙니다. 다시 선택해주세요", preferredStyle: UIAlertController.Style.alert)
+                    let okAction = UIAlertAction(title: "네", style: UIAlertAction.Style.default, handler:  {(action) in self.searchButton.isEnabled = false })
+                    warning.addAction(okAction)
+                    self.present(warning, animated: true, completion: nil)
+                }
+                print("#3 isClothes : \(self.isClothes)")
             }catch {
                 let message = "Hello"
                 let failAlarm = UIAlertController(title: "확인", message: message, preferredStyle: UIAlertController.Style.alert)
@@ -278,8 +316,7 @@ class ViewController: UIViewController {
             let confirmAlarm = UIAlertController(title: "이 결과대로 진행하시겠습니까?", message: message, preferredStyle:   UIAlertController.Style.alert)
             let okAction = UIAlertAction(title: "네", style: UIAlertAction.Style.default, handler: {
                 ACTION in
-                self.isMoved = true
-                
+//                self.isMoved = true
                 let resultView = self.storyboard?.instantiateViewController(withIdentifier: "searchResultView") as! SearchResultViewController
                 resultView.modalTransitionStyle = UIModalTransitionStyle.coverVertical
 
@@ -293,17 +330,30 @@ class ViewController: UIViewController {
                 self.present(resultView, animated: true, completion: nil)
                 self.changeBtnState(self.searchMode)
                 self.insertLog()
+                self.hideWaitMessage()
             })
             let noAction = UIAlertAction(title: "아니요", style: UIAlertAction.Style.default, handler: {
                 ACTION in
                 self.isMoved = false
                 self.changeBtnState(self.searchMode)
+                self.hideWaitMessage()
                 self.dismiss(animated: true, completion: nil)
             })
             confirmAlarm.addAction(okAction)
             confirmAlarm.addAction(noAction)
             self.present(confirmAlarm, animated: true, completion: nil)
+            showWaitMessage()
         }
+    }
+    
+    func showWaitMessage() {
+        myIndicator.startAnimating()
+        waitMessageLabel.isHidden = false
+    }
+    
+    func hideWaitMessage() {
+        myIndicator.stopAnimating()
+        waitMessageLabel.isHidden = true
     }
     
     func insertLog() {
