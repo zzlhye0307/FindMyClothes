@@ -257,7 +257,7 @@ def getGoodsInfo_5(fDirectory, numOfGoods):
             time.sleep(0.001)
             
 def getGoodsLinks(shopName):
-    fName = "New_ProductsInfo"
+    fName = "ProductsInfo"
     fDirectory = "/Users/cs402a/Desktop/PythonFile/" + fName
     
     if shopName == "육육걸즈":
